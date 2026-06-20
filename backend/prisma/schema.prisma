@@ -1,0 +1,525 @@
+// EasyBTP - Schéma de base de données
+// Application de suivi de chantier de construction
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────────── ENUMS ─────────────────────────────
+
+enum Role {
+  ADMIN
+  MAITRE_OUVRAGE
+  ARCHITECTE
+  BUREAU_ETUDES
+  ENTREPRISE
+  CONTROLE_TECHNIQUE
+  CONDUCTEUR_TRAVAUX
+  CHEF_CHANTIER
+  VISITEUR
+}
+
+enum ProjectStatus {
+  PLANIFIE
+  EN_COURS
+  EN_PAUSE
+  TERMINE
+  ANNULE
+}
+
+enum LotCategory {
+  GROS_OEUVRE
+  VRD
+  ELECTRICITE
+  FLUIDES
+  FINITIONS
+  MENUISERIE
+  AMENAGEMENT_EXTERIEUR
+}
+
+enum ReserveStatus {
+  OUVERTE
+  EN_COURS
+  TRAITEE
+  VALIDEE
+  REJETEE
+}
+
+enum Priority {
+  BASSE
+  MOYENNE
+  HAUTE
+  CRITIQUE
+}
+
+enum DocCategory {
+  PLAN
+  PV_REUNION
+  RAPPORT
+  ATTACHEMENT
+  SITUATION
+  CONTRAT
+  NOTE_TECHNIQUE
+  PHOTO
+}
+
+enum TaskStatus {
+  A_FAIRE
+  EN_COURS
+  TERMINE
+  EN_RETARD
+}
+
+enum FinanceType {
+  SITUATION
+  DECOMPTE
+  ATTACHEMENT
+}
+
+enum FinanceStatus {
+  BROUILLON
+  SOUMISE
+  VALIDEE
+  PAYEE
+  REJETEE
+}
+
+enum MaterialCategory {
+  CIMENT
+  ACIER
+  BETON
+  AGREGATS
+  BRIQUES
+  CARRELAGE
+  MENUISERIE
+  ELECTRICITE
+  PLOMBERIE
+  PEINTURE
+  QUINCAILLERIE
+  VRD
+}
+
+enum SupplyStatus {
+  BROUILLON
+  EN_ATTENTE
+  VALIDEE
+  COMMANDEE
+  LIVREE
+  CLOTUREE
+  REJETEE
+}
+
+enum OrderStatus {
+  EN_ATTENTE
+  CONFIRMEE
+  LIVREE_PARTIELLE
+  LIVREE
+  ANNULEE
+}
+
+enum MovementType {
+  ENTREE
+  SORTIE
+}
+
+enum NotificationType {
+  INFO
+  ALERTE
+  RETARD
+  STOCK
+  RESERVE
+  VALIDATION
+}
+
+// ───────────────────────────── USERS ─────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      Role     @default(VISITEUR)
+  phone     String?
+  avatar    String?
+  company   String?
+  isActive  Boolean  @default(true)
+  lastLogin DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships      ProjectMember[]
+  progressUpdates  ProgressUpdate[]
+  reservesCreated  Reserve[]        @relation("ReserveCreator")
+  reservesAssigned Reserve[]        @relation("ReserveAssignee")
+  documents        Document[]
+  photos           Photo[]
+  tasks            Task[]
+  meetingsCreated  Meeting[]
+  attendances      MeetingAttendee[]
+  meetingActions   MeetingAction[]
+  supplyRequests   SupplyRequest[]
+  activityLogs     ActivityLog[]
+  notifications    Notification[]
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  entity    String?
+  entityId  String?
+  details   String?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType @default(INFO)
+  title     String
+  message   String
+  link      String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId])
+}
+
+// ───────────────────────────── PROJECTS ─────────────────────────────
+
+model Project {
+  id              String        @id @default(cuid())
+  name            String
+  reference       String        @unique
+  description     String?
+  address         String?
+  latitude        Float?
+  longitude       Float?
+  surface         Float?
+  budget          Float?
+  marketAmount    Float?
+  clientName      String?
+  status          ProjectStatus @default(PLANIFIE)
+  progress        Float         @default(0)
+  startDate       DateTime?
+  expectedEndDate DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  members      ProjectMember[]
+  lots         Lot[]
+  reserves     Reserve[]
+  documents    Document[]
+  photos       Photo[]
+  tasks        Task[]
+  meetings     Meeting[]
+  finances     FinanceRecord[]
+  supplyReqs   SupplyRequest[]
+  orders       PurchaseOrder[]
+  movements    StockMovement[]
+}
+
+model ProjectMember {
+  id        String  @id @default(cuid())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleLabel String?
+
+  @@unique([projectId, userId])
+}
+
+// ───────────────────────────── LOTS / AVANCEMENT ─────────────────────────────
+
+model Lot {
+  id              String      @id @default(cuid())
+  projectId       String
+  project         Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name            String
+  category        LotCategory
+  weight          Float       @default(0) // poids dans l'avancement global (%)
+  plannedProgress Float       @default(0)
+  actualProgress  Float       @default(0)
+  amount          Float?
+  createdAt       DateTime    @default(now())
+
+  updates ProgressUpdate[]
+  tasks   Task[]
+}
+
+model ProgressUpdate {
+  id               String   @id @default(cuid())
+  lotId            String
+  lot              Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  date             DateTime @default(now())
+  quantityExecuted Float?
+  percentage       Float
+  note             String?
+  validated        Boolean  @default(false)
+  validatedBy      String?
+
+  @@index([lotId])
+}
+
+// ───────────────────────────── RESERVES / NON-CONFORMITES ─────────────────────────────
+
+model Reserve {
+  id           String        @id @default(cuid())
+  projectId    String
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  location     String?
+  latitude     Float?
+  longitude    Float?
+  status       ReserveStatus @default(OUVERTE)
+  priority     Priority      @default(MOYENNE)
+  createdById  String
+  createdBy    User          @relation("ReserveCreator", fields: [createdById], references: [id])
+  assignedToId String?
+  assignedTo   User?         @relation("ReserveAssignee", fields: [assignedToId], references: [id])
+  createdAt    DateTime      @default(now())
+  resolvedAt   DateTime?
+
+  photos ReservePhoto[]
+
+  @@index([projectId])
+}
+
+model ReservePhoto {
+  id        String  @id @default(cuid())
+  reserveId String
+  reserve   Reserve @relation(fields: [reserveId], references: [id], onDelete: Cascade)
+  url       String
+  caption   String?
+}
+
+// ───────────────────────────── DOCUMENTS ─────────────────────────────
+
+model Document {
+  id           String      @id @default(cuid())
+  projectId    String
+  project      Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name         String
+  category     DocCategory @default(RAPPORT)
+  version      Int         @default(1)
+  url          String
+  size         Int?
+  mimeType     String?
+  signed       Boolean     @default(false)
+  uploadedById String
+  uploadedBy   User        @relation(fields: [uploadedById], references: [id])
+  createdAt    DateTime    @default(now())
+
+  @@index([projectId])
+}
+
+// ───────────────────────────── PHOTOS / GEOLOC ─────────────────────────────
+
+model Photo {
+  id           String   @id @default(cuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url          String
+  caption      String?
+  zone         String?
+  latitude     Float?
+  longitude    Float?
+  takenAt      DateTime @default(now())
+  uploadedById String
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+
+  @@index([projectId])
+}
+
+// ───────────────────────────── PLANNING (GANTT) ─────────────────────────────
+
+model Task {
+  id           String     @id @default(cuid())
+  projectId    String
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  lotId        String?
+  lot          Lot?       @relation(fields: [lotId], references: [id])
+  name         String
+  description  String?
+  startDate    DateTime
+  endDate      DateTime
+  progress     Float      @default(0)
+  status       TaskStatus @default(A_FAIRE)
+  dependsOnId  String?
+  dependsOn    Task?      @relation("TaskDeps", fields: [dependsOnId], references: [id])
+  dependents   Task[]     @relation("TaskDeps")
+  assignedToId String?
+  assignedTo   User?      @relation(fields: [assignedToId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  @@index([projectId])
+}
+
+// ───────────────────────────── REUNIONS ─────────────────────────────
+
+model Meeting {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  date        DateTime
+  location    String?
+  agenda      String?
+  minutes     String?
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+
+  attendees MeetingAttendee[]
+  actions   MeetingAction[]
+}
+
+model MeetingAttendee {
+  id        String  @id @default(cuid())
+  meetingId String
+  meeting   Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  present   Boolean @default(false)
+
+  @@unique([meetingId, userId])
+}
+
+model MeetingAction {
+  id           String     @id @default(cuid())
+  meetingId    String
+  meeting      Meeting    @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  description  String
+  assignedToId String?
+  assignedTo   User?      @relation(fields: [assignedToId], references: [id])
+  dueDate      DateTime?
+  status       TaskStatus @default(A_FAIRE)
+}
+
+// ───────────────────────────── FINANCE ─────────────────────────────
+
+model FinanceRecord {
+  id               String        @id @default(cuid())
+  projectId        String
+  project          Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  number           String
+  type             FinanceType   @default(SITUATION)
+  date             DateTime      @default(now())
+  amount           Float
+  cumulativeAmount Float?
+  status           FinanceStatus @default(BROUILLON)
+  note             String?
+  createdAt        DateTime      @default(now())
+
+  @@index([projectId])
+}
+
+// ───────────────────────────── MATERIAUX / APPROVISIONNEMENT ─────────────────────────────
+
+model Supplier {
+  id            String   @id @default(cuid())
+  name          String
+  contactName   String?
+  email         String?
+  phone         String?
+  address       String?
+  ratingDelay   Float    @default(0) // /5
+  ratingQuality Float    @default(0)
+  ratingPrice   Float    @default(0)
+  createdAt     DateTime @default(now())
+
+  materials Material[]
+  orders    PurchaseOrder[]
+}
+
+model Material {
+  id             String           @id @default(cuid())
+  designation    String
+  reference      String           @unique
+  category       MaterialCategory
+  unit           String           @default("u")
+  unitPrice      Float            @default(0)
+  stockMin       Float            @default(0)
+  stockAvailable Float            @default(0)
+  storageZone    String?
+  photo          String?
+  supplierId     String?
+  supplier       Supplier?        @relation(fields: [supplierId], references: [id])
+  createdAt      DateTime         @default(now())
+
+  supplyRequests SupplyRequest[]
+  orderItems     PurchaseOrderItem[]
+  movements      StockMovement[]
+}
+
+model SupplyRequest {
+  id           String       @id @default(cuid())
+  projectId    String
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  requesterId  String
+  requester    User         @relation(fields: [requesterId], references: [id])
+  materialId   String
+  material     Material     @relation(fields: [materialId], references: [id])
+  quantity     Float
+  desiredDate  DateTime?
+  urgency      Priority     @default(MOYENNE)
+  observations String?
+  status       SupplyStatus @default(BROUILLON)
+  createdAt    DateTime     @default(now())
+
+  @@index([projectId])
+}
+
+model PurchaseOrder {
+  id         String      @id @default(cuid())
+  reference  String      @unique
+  supplierId String
+  supplier   Supplier    @relation(fields: [supplierId], references: [id])
+  projectId  String?
+  project    Project?    @relation(fields: [projectId], references: [id])
+  date       DateTime    @default(now())
+  status     OrderStatus @default(EN_ATTENTE)
+  total      Float       @default(0)
+  createdAt  DateTime    @default(now())
+
+  items PurchaseOrderItem[]
+}
+
+model PurchaseOrderItem {
+  id         String        @id @default(cuid())
+  orderId    String
+  order      PurchaseOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  materialId String
+  material   Material      @relation(fields: [materialId], references: [id])
+  quantity   Float
+  unitPrice  Float
+}
+
+model StockMovement {
+  id         String       @id @default(cuid())
+  materialId String
+  material   Material     @relation(fields: [materialId], references: [id], onDelete: Cascade)
+  projectId  String?
+  project    Project?     @relation(fields: [projectId], references: [id])
+  type       MovementType
+  quantity   Float
+  reference  String?
+  note       String?
+  date       DateTime     @default(now())
+
+  @@index([materialId])
+}
