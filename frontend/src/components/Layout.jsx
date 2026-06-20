@@ -78,8 +78,8 @@ export default function Layout() {
               <HardHat size={24} />
             </div>
             <div>
-              <p className="font-extrabold text-lg text-brand-900 leading-none">EasyBTP</p>
-              <p className="text-[11px] text-brand-700/60 mt-0.5">Suivi de chantier</p>
+              <p className="font-display font-extrabold text-lg text-brand-900 leading-none">EasyBTP</p>
+              <p className="font-display text-[11px] text-brand-700/60 mt-0.5">Suivi de chantier</p>
             </div>
             <button className="ml-auto lg:hidden text-brand-600" onClick={() => setMobileOpen(false)}>
               <X size={22} />
@@ -128,7 +128,7 @@ export default function Layout() {
               <Menu size={22} />
             </button>
             <div className="hidden sm:block">
-              <p className="text-sm font-semibold text-brand-900">Bonjour, {user?.firstName} 👋</p>
+              <p className="text-sm font-semibold text-brand-900">Bonjour, {user?.firstName}</p>
               <p className="text-xs text-brand-700/60">Pilotez vos chantiers en temps réel</p>
             </div>
 

@@ -87,7 +87,7 @@ export default function Meetings() {
               <div className="space-y-2">
                 {detail.actions.length === 0 ? <p className="text-sm text-brand-700/50">Aucune action.</p> : detail.actions.map((ac) => (
                   <div key={ac.id} className="flex items-center justify-between p-3 rounded-xl bg-white/50 border border-white/60">
-                    <div><p className="text-sm font-medium text-brand-900">{ac.description}</p>{ac.assignedTo && <p className="text-xs text-brand-700/60">→ {ac.assignedTo.firstName} {ac.assignedTo.lastName}{ac.dueDate ? ` · ${new Date(ac.dueDate).toLocaleDateString("fr-FR")}` : ""}</p>}</div>
+                    <div><p className="text-sm font-medium text-brand-900">{ac.description}</p>{ac.assignedTo && <p className="text-xs text-brand-700/60">Resp. : {ac.assignedTo.firstName} {ac.assignedTo.lastName}{ac.dueDate ? ` · ${new Date(ac.dueDate).toLocaleDateString("fr-FR")}` : ""}</p>}</div>
                     <Badge className={TASK_STATUS[ac.status].color}>{TASK_STATUS[ac.status].label}</Badge>
                   </div>
                 ))}

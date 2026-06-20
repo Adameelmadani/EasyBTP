@@ -42,13 +42,13 @@ export default function Login() {
           <div className="grid place-items-center w-12 h-12 rounded-2xl bg-white/15 backdrop-blur">
             <HardHat size={26} />
           </div>
-          <span className="text-2xl font-extrabold">EasyBTP</span>
+          <span className="font-display text-2xl font-extrabold">EasyBTP</span>
         </div>
         <div className="relative">
           <h1 className="text-4xl font-extrabold leading-tight">
             Pilotez vos chantiers <br /> en temps réel.
           </h1>
-          <p className="mt-4 text-white/80 max-w-md">
+          <p className="font-display mt-4 text-white/80 max-w-md">
             La plateforme centralisée de suivi de chantier : avancement, réserves, documents,
             planning, approvisionnement et finance — au même endroit.
           </p>
@@ -75,12 +75,12 @@ export default function Login() {
             <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
               <HardHat size={26} />
             </div>
-            <span className="text-2xl font-extrabold text-brand-900">EasyBTP</span>
+            <span className="font-display text-2xl font-extrabold text-brand-900">EasyBTP</span>
           </div>
 
           <div className="glass-strong p-8">
             <h2 className="text-2xl font-bold text-brand-900">Connexion</h2>
-            <p className="text-sm text-brand-700/60 mt-1 mb-6">Accédez à votre espace de pilotage.</p>
+            <p className="font-display text-sm text-brand-700/60 mt-1 mb-6">Accédez à votre espace de pilotage.</p>
 
             <form onSubmit={submit} className="space-y-4">
               <div>

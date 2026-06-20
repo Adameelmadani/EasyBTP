@@ -2,9 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Police d'affichage Quantify - titres & sous-titres (corps de texte: Inter) */
+@font-face {
+  font-family: "Quantify";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Quantify.woff") format("woff");
+}
+@font-face {
+  font-family: "Quantify";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Quantify-Bold.woff") format("woff");
+}
+
 :root {
   --brand: #16b563;
   --brand-dark: #0a7543;
+  --font-display: "Quantify", "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+@layer base {
+  /* Tous les titres utilisent la police Quantify */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer utilities {
+  /* Police d'affichage Quantify pour les sous-titres */
+  .font-display {
+    font-family: var(--font-display);
+  }
 }
 
 * {

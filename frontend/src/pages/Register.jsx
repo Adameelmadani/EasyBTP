@@ -36,12 +36,12 @@ export default function Register() {
           <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
             <HardHat size={26} />
           </div>
-          <span className="text-2xl font-extrabold text-brand-900">EasyBTP</span>
+          <span className="font-display text-2xl font-extrabold text-brand-900">EasyBTP</span>
         </div>
 
         <div className="glass-strong p-8">
           <h2 className="text-2xl font-bold text-brand-900">Créer un compte</h2>
-          <p className="text-sm text-brand-700/60 mt-1 mb-6">Rejoignez la plateforme de suivi de chantier.</p>
+          <p className="font-display text-sm text-brand-700/60 mt-1 mb-6">Rejoignez la plateforme de suivi de chantier.</p>
 
           <form onSubmit={submit} className="space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">

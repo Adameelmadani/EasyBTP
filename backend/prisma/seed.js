@@ -8,7 +8,7 @@ const hash = (p) => bcrypt.hashSync(p, 10);
 const daysFromNow = (d) => new Date(Date.now() + d * 86400000);
 
 async function main() {
-  console.log("🌱 Nettoyage de la base...");
+  console.log("Nettoyage de la base...");
   // Ordre de suppression respectant les contraintes FK
   await prisma.$transaction([
     prisma.stockMovement.deleteMany(),
@@ -35,7 +35,7 @@ async function main() {
     prisma.user.deleteMany(),
   ]);
 
-  console.log("👤 Création des utilisateurs...");
+  console.log("Création des utilisateurs...");
   const usersData = [
     { email: "admin@easybtp.ma", role: "ADMIN", firstName: "Adam", lastName: "Elmadani", company: "EasyBTP", phone: "+212 600-000000" },
     { email: "mo@easybtp.ma", role: "MAITRE_OUVRAGE", firstName: "Yassine", lastName: "Bennani", company: "Al Omrane", phone: "+212 661-112233" },
@@ -53,7 +53,7 @@ async function main() {
     users[u.role] = created;
   }
 
-  console.log("🏗️  Création des projets...");
+  console.log("Création des projets...");
   const p1 = await prisma.project.create({
     data: {
       name: "Résidence Al Manar",
@@ -102,7 +102,7 @@ async function main() {
     }
   }
 
-  console.log("📦 Création des lots et avancements...");
+  console.log("Création des lots et avancements...");
   const lotDefs = [
     { name: "Gros œuvre", category: "GROS_OEUVRE", weight: 35, planned: 80, actual: 72, amount: 13475000 },
     { name: "VRD", category: "VRD", weight: 10, planned: 60, actual: 55, amount: 3850000 },
@@ -146,7 +146,7 @@ async function main() {
     await prisma.project.update({ where: { id: p.id }, data: { progress: Math.round(prog * 10) / 10 } });
   }
 
-  console.log("⚠️  Création des réserves...");
+  console.log("Création des réserves...");
   const reserveDefs = [
     { title: "Fissure mur porteur niveau 2", desc: "Fissure verticale de 80cm observée sur le mur porteur axe B3.", location: "Bloc A - Étage 2", status: "OUVERTE", priority: "CRITIQUE", assigned: "ENTREPRISE" },
     { title: "Défaut d'étanchéité terrasse", desc: "Infiltration constatée après pluie au niveau de l'acrotère.", location: "Terrasse Bloc A", status: "EN_COURS", priority: "HAUTE", assigned: "ENTREPRISE" },
@@ -166,7 +166,7 @@ async function main() {
     });
   }
 
-  console.log("📄 Création des documents...");
+  console.log("Création des documents...");
   const docDefs = [
     { name: "Plan de masse R+6.pdf", category: "PLAN" },
     { name: "PV réunion chantier S12.pdf", category: "PV_REUNION" },
@@ -181,7 +181,7 @@ async function main() {
     });
   }
 
-  console.log("📸 Création des photos géolocalisées...");
+  console.log("Création des photos géolocalisées...");
   const photoUrls = [
     "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800",
     "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800",
@@ -201,7 +201,7 @@ async function main() {
     });
   }
 
-  console.log("📅 Création du planning (Gantt)...");
+  console.log("Création du planning (Gantt)...");
   const taskDefs = [
     { name: "Terrassement et fondations", start: -180, end: -120, progress: 100, status: "TERMINE" },
     { name: "Élévation gros œuvre R+6", start: -120, end: -10, progress: 85, status: "EN_COURS" },
@@ -227,7 +227,7 @@ async function main() {
     data: { projectId: p1.id, name: "Livraison menuiserie aluminium", startDate: daysFromNow(-15), endDate: daysFromNow(-3), progress: 30, status: "EN_RETARD", assignedToId: users.ENTREPRISE.id },
   });
 
-  console.log("🤝 Création des réunions...");
+  console.log("Création des réunions...");
   const meeting = await prisma.meeting.create({
     data: {
       projectId: p1.id, title: "Réunion de chantier hebdomadaire S15", date: daysFromNow(-2),
@@ -243,7 +243,7 @@ async function main() {
     },
   });
 
-  console.log("💰 Création des situations financières...");
+  console.log("Création des situations financières...");
   let cumul = 0;
   for (let i = 1; i <= 4; i++) {
     const amount = 3500000 + i * 250000;
@@ -257,7 +257,7 @@ async function main() {
     });
   }
 
-  console.log("🏭 Création des fournisseurs...");
+  console.log("Création des fournisseurs...");
   const suppliers = {};
   const supplierDefs = [
     { name: "LafargeHolcim Maroc", contactName: "M. Berrada", email: "contact@lafarge.ma", phone: "+212 522-667788", address: "Casablanca", rd: 4.5, rq: 4.8, rp: 3.9 },
@@ -271,7 +271,7 @@ async function main() {
     });
   }
 
-  console.log("🧱 Création des matériaux...");
+  console.log("Création des matériaux...");
   const materials = {};
   const matDefs = [
     { designation: "Ciment CPJ 45", reference: "CIM-CPJ45", category: "CIMENT", unit: "sac 50kg", price: 75, min: 200, stock: 145, zone: "Dépôt A", supplier: "LafargeHolcim Maroc" },
@@ -295,7 +295,7 @@ async function main() {
     });
   }
 
-  console.log("📝 Création des demandes d'approvisionnement...");
+  console.log("Création des demandes d'approvisionnement...");
   const supplyDefs = [
     { ref: "ACR-HA12", qty: 8, urgency: "CRITIQUE", status: "EN_ATTENTE", obs: "Rupture imminente pour le ferraillage R+5" },
     { ref: "BRQ-8T", qty: 15, urgency: "HAUTE", status: "VALIDEE", obs: "Maçonnerie étages courants" },
@@ -312,7 +312,7 @@ async function main() {
     });
   }
 
-  console.log("🛒 Création des bons de commande...");
+  console.log("Création des bons de commande...");
   const order = await prisma.purchaseOrder.create({
     data: {
       reference: "BC-2026-0001", supplierId: suppliers["Sonasid (Acier)"].id, projectId: p1.id,
@@ -328,14 +328,14 @@ async function main() {
     },
   });
 
-  console.log("🔄 Création des mouvements de stock...");
+  console.log("Création des mouvements de stock...");
   for (const [ref, type, qty] of [["CIM-CPJ45", "ENTREE", 200], ["CIM-CPJ45", "SORTIE", 55], ["ACR-HA12", "SORTIE", 4], ["BET-C2530", "ENTREE", 120], ["BET-C2530", "SORTIE", 40]]) {
     await prisma.stockMovement.create({
       data: { materialId: materials[ref].id, projectId: p1.id, type, quantity: qty, reference: "MVT-" + ref, note: type === "ENTREE" ? "Réception" : "Consommation chantier" },
     });
   }
 
-  console.log("🔔 Création des notifications...");
+  console.log("Création des notifications...");
   await prisma.notification.createMany({
     data: [
       { userId: users.CONDUCTEUR_TRAVAUX.id, type: "STOCK", title: "Stock bas: Acier HA Ø12", message: "6 t restantes (seuil 10 t)" },
@@ -345,7 +345,7 @@ async function main() {
     ],
   });
 
-  console.log("\n✅ Seed terminé avec succès !");
+  console.log("\nSeed terminé avec succès !");
   console.log("──────────────────────────────────────────");
   console.log("  Comptes de démonstration (mdp: password123)");
   console.log("──────────────────────────────────────────");
@@ -354,7 +354,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error("❌ Erreur de seed:", e);
+    console.error("Erreur de seed:", e);
     process.exit(1);
   })
   .finally(async () => {

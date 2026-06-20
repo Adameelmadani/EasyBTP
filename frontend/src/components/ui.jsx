@@ -20,7 +20,7 @@ export function PageHeader({ title, subtitle, icon: Icon, actions }) {
         )}
         <div>
           <h1 className="text-2xl font-bold text-brand-900 leading-tight">{title}</h1>
-          {subtitle && <p className="text-sm text-brand-700/70 mt-0.5">{subtitle}</p>}
+          {subtitle && <p className="font-display text-sm text-brand-700/70 mt-0.5">{subtitle}</p>}
         </div>
       </div>
       {actions && <div className="flex items-center gap-2.5">{actions}</div>}

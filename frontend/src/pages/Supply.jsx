@@ -33,7 +33,7 @@ export default function Supply() {
     const next = FLOW[idx + 1];
     if (!next) return;
     await api.patch(`/supply/${req.id}/status`, { status: next });
-    load(); toast(`Demande → ${SUPPLY_STATUS[next].label}`);
+    load(); toast(`Demande : ${SUPPLY_STATUS[next].label}`);
   };
 
   return (

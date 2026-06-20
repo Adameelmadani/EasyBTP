@@ -19,6 +19,7 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "Segoe UI", "system-ui", "sans-serif"],
+        display: ["Quantify", "Inter", "Segoe UI", "system-ui", "sans-serif"],
       },
       boxShadow: {
         glass: "0 8px 32px 0 rgba(16, 90, 60, 0.12)",

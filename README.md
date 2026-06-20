@@ -1,4 +1,4 @@
-# 🏗️ EasyBTP — Plateforme de suivi de chantier de construction
+# EasyBTP — Plateforme de suivi de chantier de construction
 
 Application web complète de pilotage de chantiers (BTP), développée d'après le
 **Cahier des Prescriptions Techniques** : suivi d'avancement, réserves, gestion
@@ -9,7 +9,7 @@ Interface **glassmorphism** thème **blanc & vert**, multi-rôles, multi-projets
 
 ---
 
-## 🧱 Stack technique
+## Stack technique
 
 | Couche | Technologie |
 |---|---|
@@ -20,7 +20,7 @@ Interface **glassmorphism** thème **blanc & vert**, multi-rôles, multi-projets
 
 ---
 
-## 🚀 Démarrage rapide
+## Démarrage rapide
 
 ### Prérequis
 - **Node.js ≥ 18** (testé sur Node 24)
@@ -59,7 +59,7 @@ npm run frontend  # terminal 2
 
 ---
 
-## 👤 Comptes de démonstration
+## Comptes de démonstration
 
 Mot de passe pour tous : **`password123`**
 
@@ -77,26 +77,26 @@ Mot de passe pour tous : **`password123`**
 
 ---
 
-## 📦 Modules fonctionnels (conformes au CPT)
+## Modules fonctionnels (conformes au CPT)
 
 | # | Module | Statut |
 |---|---|---|
-| 4.1 | Gestion des utilisateurs (9 rôles, permissions, journalisation) | ✅ |
-| 4.2 | Gestion des projets (GPS, budget, intervenants, marché) | ✅ |
-| 4.3 | Tableau de bord dynamique (KPIs, graphiques, alertes) | ✅ |
-| 4.4 | Suivi d'avancement par lot (saisie, historique, validation) | ✅ |
-| 4.5 | Gestion documentaire (catégories, versions, signature) | ✅ |
-| 4.6 | Réserves & non-conformités (Kanban, statuts, affectation) | ✅ |
-| 4.7 | Planning chantier (diagramme de Gantt, dépendances) | ✅ |
-| 4.8 | Gestion des réunions (PV, présence, actions à suivre) | ✅ |
-| 4.9 | Gestion financière (situations, décomptes, suivi budgétaire) | ✅ |
-| 4.10 | Module photo & géolocalisation (zones, GPS, horodatage) | ✅ |
-| 4.11 | **Approvisionnement** : matériaux, demandes, fournisseurs, bons de commande, stock, mouvements, valorisation, alertes seuil | ✅ |
-| 5.1 | Sécurité : JWT, bcrypt, RBAC, journal d'activité | ✅ |
+| 4.1 | Gestion des utilisateurs (9 rôles, permissions, journalisation) | |
+| 4.2 | Gestion des projets (GPS, budget, intervenants, marché) | |
+| 4.3 | Tableau de bord dynamique (KPIs, graphiques, alertes) | |
+| 4.4 | Suivi d'avancement par lot (saisie, historique, validation) | |
+| 4.5 | Gestion documentaire (catégories, versions, signature) | |
+| 4.6 | Réserves & non-conformités (Kanban, statuts, affectation) | |
+| 4.7 | Planning chantier (diagramme de Gantt, dépendances) | |
+| 4.8 | Gestion des réunions (PV, présence, actions à suivre) | |
+| 4.9 | Gestion financière (situations, décomptes, suivi budgétaire) | |
+| 4.10 | Module photo & géolocalisation (zones, GPS, horodatage) | |
+| 4.11 | **Approvisionnement** : matériaux, demandes, fournisseurs, bons de commande, stock, mouvements, valorisation, alertes seuil | |
+| 5.1 | Sécurité : JWT, bcrypt, RBAC, journal d'activité | |
 
 ---
 
-## 🗂️ Structure du projet
+## Structure du projet
 
 ```
 EasyBTP/
@@ -121,7 +121,7 @@ EasyBTP/
 
 ---
 
-## 🔌 Aperçu de l'API REST
+## Aperçu de l'API REST
 
 | Méthode | Endpoint | Description |
 |---|---|---|
@@ -142,16 +142,17 @@ EasyBTP/
 
 ---
 
-## 🎨 Design
+## Design
 
 - **Glassmorphism** : cartes translucides (`backdrop-blur`), bordures claires, halos verts.
 - **Palette** : blanc cassé + vert `brand` (`#16b563` → `#0a7543`).
 - **Responsive** : sidebar repliable, grilles fluides, optimisé terrain.
-- Police **Inter**, animations douces, toasts, modales.
+- Typographie : **Quantify** pour les titres & sous-titres, **Inter** pour le corps de texte.
+- Animations douces, toasts, modales.
 
 ---
 
-## 📝 Notes
+## Notes
 
 - Les uploads sont stockés dans `backend/uploads/` et servis sur `/uploads`.
 - Pour basculer sur un PostgreSQL non-Docker, ajustez `DATABASE_URL` dans `backend/.env`.
