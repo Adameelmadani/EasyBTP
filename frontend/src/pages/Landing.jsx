@@ -145,7 +145,7 @@ export default function Landing() {
       </header>
 
       {/* ====== HERO ====== */}
-      <section className="relative px-4 lg:px-8 pt-8 lg:pt-14 pb-20">
+      <section className="relative px-4 lg:px-8 lg:pt-14 pb-20">
         <div className="absolute inset-0 grid-overlay grid-overlay-fade opacity-70" />
         <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           {/* texte */}
@@ -211,7 +211,7 @@ export default function Landing() {
       </section>
 
       {/* ====== PROBLÈMES ====== */}
-      <section id="problemes" className="relative px-4 lg:px-8 py-20 scroll-mt-24">
+      <section id="problemes" className="relative px-4 lg:px-8 pb-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto">
           <div className="reveal-on-scroll max-w-3xl">
             <p className="mono-tag">[ le constat ]</p>
@@ -239,7 +239,7 @@ export default function Landing() {
       </section>
 
       {/* ====== SOLUTION (01-04) ====== */}
-      <section id="solution" className="relative px-4 lg:px-8 py-20 scroll-mt-24">
+      <section id="solution" className="relative px-4 lg:px-8 pb-20 scroll-mt-24">
         <div className="absolute inset-0 grid-overlay grid-overlay-fade opacity-40" />
         <div className="relative max-w-7xl mx-auto">
           <div className="reveal-on-scroll max-w-3xl">
@@ -262,7 +262,7 @@ export default function Landing() {
       </section>
 
       {/* ====== MODULES ====== */}
-      <section id="modules" className="relative px-4 lg:px-8 py-20 scroll-mt-24">
+      <section id="modules" className="relative px-4 lg:px-8 pb-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto">
           <div className="reveal-on-scroll flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
@@ -306,7 +306,7 @@ export default function Landing() {
       </section>
 
       {/* ====== CTA ====== */}
-      <section className="relative px-4 lg:px-8 py-20">
+      <section className="relative px-4 lg:px-8 pb-20">
         <div className="reveal-on-scroll relative max-w-5xl mx-auto glass-strong overflow-hidden text-center p-12 lg:p-16">
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[480px] h-[480px] rounded-full bg-accent-400/15 blur-3xl animate-glow-pulse" />
           <div className="relative">
