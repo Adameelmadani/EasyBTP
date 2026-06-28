@@ -49,7 +49,7 @@ export default function Orders() {
                 <Badge className={ORDER_STATUS[o.status].color}>{ORDER_STATUS[o.status].label}</Badge>
               </div>
               <div className="flex items-center justify-between pt-2 border-t border-brand-100/60">
-                <span className="text-xs text-brand-700/60">{o.items?.length || 0} ligne(s) · {o.project?.name || "—"}</span>
+                <span className="text-xs text-brand-700/60">{o.items?.length || 0} ligne(s) · {o.project?.name || "-"}</span>
                 <span className="font-bold text-brand-900">{fmtMAD(o.total)}</span>
               </div>
             </Card>
@@ -65,7 +65,7 @@ export default function Orders() {
             <div className="flex flex-wrap gap-3 text-sm">
               <Badge className={ORDER_STATUS[detail.status].color}>{ORDER_STATUS[detail.status].label}</Badge>
               <span className="text-brand-700/70">Fournisseur : <b className="text-brand-900">{detail.supplier?.name}</b></span>
-              <span className="text-brand-700/70">Projet : {detail.project?.name || "—"}</span>
+              <span className="text-brand-700/70">Projet : {detail.project?.name || "-"}</span>
             </div>
             <Card className="p-0 overflow-hidden">
               <table className="w-full text-sm">
@@ -118,7 +118,7 @@ function OrderModal({ open, onClose, suppliers, materials, projects, onSaved }) 
       <form onSubmit={submit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <Field label="Fournisseur *"><Select value={supplierId} onChange={(e) => setSupplierId(e.target.value)} required><option value="">Sélectionner...</option>{suppliers.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</Select></Field>
-          <Field label="Projet"><Select value={projectId} onChange={(e) => setProjectId(e.target.value)}><option value="">— Aucun —</option>{projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</Select></Field>
+          <Field label="Projet"><Select value={projectId} onChange={(e) => setProjectId(e.target.value)}><option value="">- Aucun -</option>{projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</Select></Field>
         </div>
         <div>
           <div className="flex items-center justify-between mb-2"><p className="label mb-0">Lignes de commande</p><button type="button" className="btn-soft btn-sm" onClick={addItem}><Plus size={13} /> Ligne</button></div>

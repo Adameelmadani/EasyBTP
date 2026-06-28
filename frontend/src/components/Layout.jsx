@@ -12,7 +12,7 @@ import { ROLE_LABELS } from "../lib/constants.js";
 
 const NAV = [
   { section: "Pilotage", items: [
-    { to: "/", label: "Tableau de bord", icon: LayoutDashboard, end: true },
+    { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard, end: true },
     { to: "/projects", label: "Projets", icon: Building2 },
     { to: "/planning", label: "Planning", icon: CalendarRange },
   ]},
@@ -65,6 +65,9 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex">
+      {/* Décor d'arrière-plan (style landing) */}
+      <div className="fixed inset-0 -z-10 grid-overlay grid-overlay-fade opacity-50 pointer-events-none" />
+
       {/* Sidebar */}
       <aside
         className={`fixed lg:sticky top-0 z-40 h-screen w-72 shrink-0 transition-transform duration-300 ${
@@ -74,12 +77,14 @@ export default function Layout() {
         <div className="h-full m-3 mr-0 lg:mr-3 glass-strong flex flex-col overflow-hidden">
           {/* Logo */}
           <div className="flex items-center gap-3 px-5 py-5 border-b border-brand-100/60">
-            <div className="grid place-items-center w-11 h-11 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
+            <div className="grid place-items-center w-11 h-11 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
               <HardHat size={24} />
             </div>
             <div>
-              <p className="font-display font-extrabold text-lg text-brand-900 leading-none">EasyBTP</p>
-              <p className="font-display text-[11px] text-brand-700/60 mt-0.5">Suivi de chantier</p>
+              <p className="font-display font-extrabold text-lg leading-none">
+                <span className="text-brand-900">Easy</span><span className="text-gradient-accent">BTP</span>
+              </p>
+              <p className="font-mono text-[10px] text-brand-700/60 mt-1 tracking-wider">[ suivi de chantier ]</p>
             </div>
             <button className="ml-auto lg:hidden text-brand-600" onClick={() => setMobileOpen(false)}>
               <X size={22} />

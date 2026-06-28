@@ -35,16 +35,16 @@ export default function Dashboard() {
 
       {/* KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="Projets actifs" value={kpis.activeProjects} sub={`${kpis.totalProjects} au total`} icon={Building2} tint="brand" />
-        <StatCard label="Avancement moyen" value={`${kpis.avgProgress}%`} sub="tous chantiers" icon={TrendingUp} tint="sky" />
-        <StatCard label="Réserves ouvertes" value={kpis.reservesOpen} sub={`${kpis.reservesTotal} au total`} icon={AlertTriangle} tint="amber" />
-        <StatCard label="Stocks bas" value={kpis.lowStockCount} sub="à réapprovisionner" icon={Package} tint="red" />
+        <StatCard label="Projets actifs" value={<span className="font-display">{kpis.activeProjects}</span>} sub={`${kpis.totalProjects} au total`} icon={Building2} tint="brand" />
+        <StatCard label="Avancement moyen" value={<span className="font-display">{kpis.avgProgress}%</span>} sub="tous chantiers" icon={TrendingUp} tint="sky" />
+        <StatCard label="Réserves ouvertes" value={<span className="font-display">{kpis.reservesOpen}</span>} sub={`${kpis.reservesTotal} au total`} icon={AlertTriangle} tint="amber" />
+        <StatCard label="Stocks bas" value={<span className="font-display">{kpis.lowStockCount}</span>} sub="à réapprovisionner" icon={Package} tint="red" />
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="Montant marchés" value={fmtMADc(kpis.totalMarket)} icon={Wallet} tint="indigo" />
-        <StatCard label="Facturé (validé)" value={fmtMADc(kpis.billed)} icon={Wallet} tint="brand" />
-        <StatCard label="Valeur du stock" value={fmtMADc(kpis.stockValue)} icon={Package} tint="sky" />
-        <StatCard label="Tâches en retard" value={data.lateTasks.length} icon={Clock} tint="red" />
+        <StatCard label="Montant marchés" value={<span className="font-display">{fmtMADc(kpis.totalMarket)}</span>} icon={Wallet} tint="indigo" />
+        <StatCard label="Facturé (validé)" value={<span className="font-display">{fmtMADc(kpis.billed)}</span>} icon={Wallet} tint="brand" />
+        <StatCard label="Valeur du stock" value={<span className="font-display">{fmtMADc(kpis.stockValue)}</span>} icon={Package} tint="sky" />
+        <StatCard label="Tâches en retard" value={<span className="font-display">{data.lateTasks.length}</span>} icon={Clock} tint="red" />
       </div>
 
       {/* Charts row */}

@@ -122,7 +122,7 @@ function MaterialModal({ open, onClose, material, suppliers, onSaved }) {
         <Field label="Stock disponible"><Input type="number" value={form.stockAvailable || ""} onChange={set("stockAvailable")} /></Field>
         <Field label="Stock minimum (seuil)"><Input type="number" value={form.stockMin || ""} onChange={set("stockMin")} /></Field>
         <Field label="Zone de stockage"><Input value={form.storageZone || ""} onChange={set("storageZone")} /></Field>
-        <Field label="Fournisseur"><Select value={form.supplierId || ""} onChange={set("supplierId")}><option value="">— Aucun —</option>{suppliers.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</Select></Field>
+        <Field label="Fournisseur"><Select value={form.supplierId || ""} onChange={set("supplierId")}><option value="">- Aucun -</option>{suppliers.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</Select></Field>
         <div className="sm:col-span-2 flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={onClose}>Annuler</button><button className="btn-primary"><Plus size={16} /> {material ? "Enregistrer" : "Créer"}</button></div>
       </form>
     </Modal>

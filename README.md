@@ -1,7 +1,6 @@
-# EasyBTP — Plateforme de suivi de chantier de construction
+# EasyBTP: Plateforme de suivi de chantier de construction
 
-Application web complète de pilotage de chantiers (BTP), développée d'après le
-**Cahier des Prescriptions Techniques** : suivi d'avancement, réserves, gestion
+Application web complète de pilotage de chantiers (BTP): suivi d'avancement, réserves, gestion
 documentaire, planning, réunions, finance et **gestion complète de l'approvisionnement
 en matériaux**.
 
@@ -24,7 +23,7 @@ Interface **glassmorphism** thème **blanc & vert**, multi-rôles, multi-projets
 
 ### Prérequis
 - **Node.js ≥ 18** (testé sur Node 24)
-- **Docker Desktop** (pour PostgreSQL) — *ou* un PostgreSQL local
+- **Docker Desktop** (pour PostgreSQL) *ou* un PostgreSQL local
 
 ### 1. Lancer la base de données (PostgreSQL via Docker)
 ```bash
@@ -158,4 +157,4 @@ EasyBTP/
 - Pour basculer sur un PostgreSQL non-Docker, ajustez `DATABASE_URL` dans `backend/.env`.
 - `npx prisma studio` ouvre un explorateur visuel de la base.
 
-© 2026 EasyBTP — Projet académique ENSAM.
+© 2026 EasyBTP

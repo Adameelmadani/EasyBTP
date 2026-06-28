@@ -31,6 +31,7 @@ export function PageHeader({ title, subtitle, icon: Icon, actions }) {
 export function StatCard({ label, value, sub, icon: Icon, tint = "brand", className = "" }) {
   const tints = {
     brand: "from-brand-500 to-brand-700",
+    accent: "from-accent-400 to-accent-600",
     amber: "from-amber-400 to-amber-600",
     sky: "from-sky-400 to-sky-600",
     red: "from-red-400 to-red-600",

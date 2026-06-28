@@ -24,7 +24,7 @@ export default function Login() {
     try {
       await login(email, password);
       toast("Connexion réussie");
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       toast(err.response?.data?.message || "Échec de la connexion", "error");
     } finally {
@@ -35,22 +35,38 @@ export default function Login() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Hero gauche */}
-      <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800 text-white">
-        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-float" />
-        <div className="absolute bottom-10 -left-10 w-72 h-72 rounded-full bg-brand-300/20 blur-3xl" />
+      <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden text-brand-900">
+        {/* fond clair + halos + grille */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-accent-50" />
+        <div className="absolute inset-0 grid-overlay grid-overlay-fade opacity-80" />
+        <div className="absolute -top-24 -right-16 w-96 h-96 rounded-full bg-accent-300/30 blur-3xl animate-glow-pulse" />
+        <div className="absolute bottom-0 -left-10 w-80 h-80 rounded-full bg-brand-300/30 blur-3xl" />
+        {/* cristal 3D */}
+        <div className="scene-3d absolute top-1/2 right-10 -translate-y-1/2 w-64 h-64 animate-float-lg grid place-items-center">
+          <div className="gem w-[190px] h-[190px]">
+            <div className="gem-pyr top">
+              <span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" />
+            </div>
+            <div className="gem-pyr bottom">
+              <span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" />
+            </div>
+          </div>
+        </div>
+
         <div className="relative flex items-center gap-3">
-          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-white/15 backdrop-blur">
+          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
             <HardHat size={26} />
           </div>
-          <span className="font-display text-2xl font-extrabold">EasyBTP</span>
+          <span className="font-display text-2xl font-extrabold">Easy<span className="text-gradient-accent">BTP</span></span>
         </div>
         <div className="relative">
-          <h1 className="text-4xl font-extrabold leading-tight">
-            Pilotez vos chantiers <br /> en temps réel.
+          <p className="mono-tag mb-3">[ plateforme de pilotage de chantier ]</p>
+          <h1 className="text-4xl font-extrabold leading-tight text-brand-900">
+            Pilotez vos chantiers <br /> <span className="text-gradient-accent">en temps réel.</span>
           </h1>
-          <p className="font-display mt-4 text-white/80 max-w-md">
+          <p className="text-sm mt-4 text-brand-700/80 max-w-md">
             La plateforme centralisée de suivi de chantier : avancement, réserves, documents,
-            planning, approvisionnement et finance — au même endroit.
+            planning, approvisionnement et finance au même endroit.
           </p>
           <div className="mt-8 space-y-3 max-w-sm">
             {[
@@ -58,14 +74,14 @@ export default function Login() {
               { icon: ShieldCheck, t: "Réserves, non-conformités & qualité" },
               { icon: Building2, t: "Gestion multi-projets & intervenants" },
             ].map((f, i) => (
-              <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur rounded-2xl px-4 py-3 border border-white/15">
-                <f.icon size={20} />
-                <span className="text-sm font-medium">{f.t}</span>
+              <div key={i} className="flex items-center gap-3 bg-white/70 backdrop-blur rounded-2xl px-4 py-3 border border-brand-100 shadow-glass-sm">
+                <f.icon size={20} className="text-accent-500" />
+                <span className="text-sm font-medium text-brand-800">{f.t}</span>
               </div>
             ))}
           </div>
         </div>
-        <p className="relative text-xs text-white/50">© 2026 EasyBTP · Cahier des Prescriptions Techniques</p>
+        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 EasyBTP</p>
       </div>
 
       {/* Formulaire droite */}

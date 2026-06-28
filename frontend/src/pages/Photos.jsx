@@ -111,7 +111,7 @@ function PhotoModal({ open, onClose, projectId, onSaved }) {
             <input type="file" accept="image/*" className="hidden" onChange={(e) => setFile(e.target.files[0])} />
           </label>
         </Field>
-        <p className="text-center text-xs text-brand-700/40">— ou —</p>
+        <p className="text-center text-xs text-brand-700/40"> ou </p>
         <Field label="URL d'image"><Input value={form.url || ""} onChange={set("url")} placeholder="https://..." /></Field>
         <Field label="Légende"><Input value={form.caption || ""} onChange={set("caption")} /></Field>
         <div className="grid grid-cols-3 gap-3">

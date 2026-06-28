@@ -39,7 +39,7 @@ export default function Progress() {
             <Card className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-sm text-brand-700/60">Avancement global · {project.name}</p>
-                <p className="text-3xl font-extrabold text-brand-700">{Math.round(project.progress)}%</p>
+                <p className="font-display text-3xl font-extrabold text-brand-700">{Math.round(project.progress)}%</p>
               </div>
               <div className="flex-1 min-w-[200px] max-w-md"><ProgressBar value={project.progress} /></div>
             </Card>

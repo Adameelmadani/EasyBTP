@@ -21,7 +21,7 @@ export default function Register() {
     try {
       await register(form);
       toast("Compte créé avec succès");
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       toast(err.response?.data?.message || "Échec de l'inscription", "error");
     } finally {

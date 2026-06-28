@@ -43,8 +43,8 @@ export default function UsersPage() {
                     </div>
                   </td>
                   <td className="p-4"><Badge className="bg-brand-50 text-brand-700"><Shield size={11} /> {ROLE_LABELS[u.role]}</Badge></td>
-                  <td className="p-4 text-brand-700/70">{u.phone || "—"}</td>
-                  <td className="p-4 text-brand-700/70">{u.company || "—"}</td>
+                  <td className="p-4 text-brand-700/70">{u.phone || "-"}</td>
+                  <td className="p-4 text-brand-700/70">{u.company || "-"}</td>
                   <td className="p-4">{u.isActive ? <Badge className="bg-brand-100 text-brand-700"><CheckCircle2 size={11} /> Actif</Badge> : <Badge className="bg-red-100 text-red-700"><XCircle size={11} /> Inactif</Badge>}</td>
                   {isAdmin && <td className="p-4"><div className="flex gap-1.5"><button className="btn-ghost btn-sm" onClick={() => { setEdit(u); setOpen(true); }}><Pencil size={13} /></button><button className="btn-danger btn-sm" onClick={() => remove(u)}><Trash2 size={13} /></button></div></td>}
                 </tr>

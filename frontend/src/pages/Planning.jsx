@@ -124,7 +124,7 @@ function TaskModal({ open, onClose, projectId, users, onSaved }) {
         </div>
         <Field label="Responsable">
           <Select value={form.assignedToId || ""} onChange={set("assignedToId")}>
-            <option value="">— Aucun —</option>
+            <option value="">- Aucun -</option>
             {users.map((u) => <option key={u.id} value={u.id}>{u.firstName} {u.lastName}</option>)}
           </Select>
         </Field>

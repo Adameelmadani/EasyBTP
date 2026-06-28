@@ -3,6 +3,7 @@ import { useAuth } from "./context/AuthContext.jsx";
 import { Spinner } from "./components/ui.jsx";
 import Layout from "./components/Layout.jsx";
 
+import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -35,8 +36,11 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
-      <Route path="/register" element={user ? <Navigate to="/" replace /> : <Register />} />
+      {/* Landing publique */}
+      <Route path="/" element={<Landing />} />
+
+      <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />
+      <Route path="/register" element={user ? <Navigate to="/dashboard" replace /> : <Register />} />
 
       <Route
         element={
@@ -45,7 +49,7 @@ export default function App() {
           </Protected>
         }
       >
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/progress" element={<Progress />} />
@@ -64,7 +68,7 @@ export default function App() {
         <Route path="/activity" element={<Activity />} />
       </Route>
 
-      <Route path="*" element={<Navigate to={user ? "/" : "/login"} replace />} />
+      <Route path="*" element={<Navigate to={user ? "/dashboard" : "/"} replace />} />
     </Routes>
   );
 }

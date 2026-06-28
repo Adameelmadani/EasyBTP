@@ -60,7 +60,7 @@ export default function Reserves() {
                       {r.assignedTo && <p className="flex items-center gap-1 text-xs text-brand-700/60"><User size={11} /> {r.assignedTo.firstName} {r.assignedTo.lastName}</p>}
                     </div>
                   ))}
-                  {items.length === 0 && <p className="text-center text-xs text-brand-700/40 py-4">—</p>}
+                  {items.length === 0 && <p className="text-center text-xs text-brand-700/40 py-4">-</p>}
                 </div>
               </div>
             );
@@ -97,8 +97,8 @@ function ReserveModal({ open, onClose, projectId, users, onSaved }) {
         </div>
         <Field label="Affecter à">
           <Select value={form.assignedToId || ""} onChange={set("assignedToId")}>
-            <option value="">— Non affectée —</option>
-            {users.map((u) => <option key={u.id} value={u.id}>{u.firstName} {u.lastName} — {ROLE_LABELS[u.role]}</option>)}
+            <option value="">- Non affectée -</option>
+            {users.map((u) => <option key={u.id} value={u.id}>{u.firstName} {u.lastName} - {ROLE_LABELS[u.role]}</option>)}
           </Select>
         </Field>
         <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={onClose}>Annuler</button><button className="btn-primary"><Plus size={16} /> Créer</button></div>

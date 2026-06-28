@@ -101,10 +101,10 @@ export default function ProjectDetail() {
             {[
               ["Budget", fmtMAD(project.budget)],
               ["Montant du marché", fmtMAD(project.marketAmount)],
-              ["Surface", project.surface ? `${fmtNum(project.surface)} m²` : "—"],
-              ["Date de début", project.startDate ? new Date(project.startDate).toLocaleDateString("fr-FR") : "—"],
-              ["Fin prévisionnelle", project.expectedEndDate ? new Date(project.expectedEndDate).toLocaleDateString("fr-FR") : "—"],
-              ["Coordonnées GPS", project.latitude ? `${project.latitude.toFixed(4)}, ${project.longitude.toFixed(4)}` : "—"],
+              ["Surface", project.surface ? `${fmtNum(project.surface)} m²` : "-"],
+              ["Date de début", project.startDate ? new Date(project.startDate).toLocaleDateString("fr-FR") : "-"],
+              ["Fin prévisionnelle", project.expectedEndDate ? new Date(project.expectedEndDate).toLocaleDateString("fr-FR") : "-"],
+              ["Coordonnées GPS", project.latitude ? `${project.latitude.toFixed(4)}, ${project.longitude.toFixed(4)}` : "-"],
             ].map(([k, v]) => (
               <div key={k} className="bg-white/50 rounded-xl p-3.5 border border-white/60">
                 <p className="text-xs text-brand-700/60">{k}</p>
@@ -250,7 +250,7 @@ function MemberModal({ open, onClose, projectId, users, existing, onSaved }) {
         <Field label="Utilisateur">
           <Select value={userId} onChange={(e) => setUserId(e.target.value)} required>
             <option value="">Sélectionner...</option>
-            {available.map((u) => <option key={u.id} value={u.id}>{u.firstName} {u.lastName} — {ROLE_LABELS[u.role]}</option>)}
+            {available.map((u) => <option key={u.id} value={u.id}>{u.firstName} {u.lastName} - {ROLE_LABELS[u.role]}</option>)}
           </Select>
         </Field>
         <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={onClose}>Annuler</button><button className="btn-primary"><Plus size={16} /> Ajouter</button></div>

@@ -21,11 +21,14 @@
 :root {
   --brand: #16b563;
   --brand-dark: #0a7543;
+  --accent: #ff6a1a;
+  --accent-soft: #ff7e3e;
+  --text: #0f2e22;
+  --text-muted: #4f6b5c;
   --font-display: "Quantify", "Inter", "Segoe UI", system-ui, sans-serif;
 }
 
 @layer base {
-  /* Tous les titres utilisent la police Quantify */
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: 0.01em;
@@ -33,36 +36,40 @@
 }
 
 @layer utilities {
-  /* Police d'affichage Quantify pour les sous-titres */
-  .font-display {
-    font-family: var(--font-display);
-  }
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace; }
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html, body, #root {
-  height: 100%;
-  margin: 0;
+html, body, #root { height: 100%; margin: 0; }
+
+/* Défilement animé vers les ancres (Enjeux / Solution / Modules),
+   décalé sous la barre de navigation collante (~6.5rem). */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
 }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   color: #0f2e22;
-  /* Décor d'arrière-plan: blanc avec halos verts (glassmorphism) */
-  background-color: #f1faf4;
+  /* Décor clair : blanc cassé + halos verts & orange (glassmorphism) */
+  background-color: #f3faf5;
   background-image:
-    radial-gradient(900px circle at 8% 12%, rgba(63, 208, 127, 0.18), transparent 45%),
-    radial-gradient(800px circle at 92% 8%, rgba(22, 181, 99, 0.14), transparent 42%),
-    radial-gradient(1000px circle at 70% 100%, rgba(10, 147, 80, 0.12), transparent 50%);
+    radial-gradient(900px circle at 8% 10%, rgba(63, 208, 127, 0.16), transparent 45%),
+    radial-gradient(850px circle at 94% 4%, rgba(255, 126, 62, 0.14), transparent 44%),
+    radial-gradient(1000px circle at 72% 104%, rgba(22, 181, 99, 0.12), transparent 50%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
 @layer components {
-  /* Carte de verre */
+  /* Carte de verre (claire) */
   .glass {
     @apply bg-white/60 backdrop-blur-xl border border-white/70 shadow-glass rounded-2xl;
   }
@@ -75,13 +82,24 @@ body {
 
   /* Boutons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-400/50 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-400/50 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap;
   }
+  /* CTA principal : ORANGE */
   .btn-primary {
-    @apply btn bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow hover:from-brand-600 hover:to-brand-800 hover:-translate-y-0.5;
+    @apply btn text-white;
+    background-image: linear-gradient(135deg, #ff8a4c, #f15206);
+    box-shadow: 0 10px 26px -8px rgba(255, 106, 26, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
+  .btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+  /* CTA secondaire vert */
+  .btn-green {
+    @apply btn text-white;
+    background-image: linear-gradient(135deg, #16b563, #0a7543);
+    box-shadow: 0 10px 26px -10px rgba(22, 181, 99, 0.5);
+  }
+  .btn-green:hover { filter: brightness(1.05); transform: translateY(-1px); }
   .btn-ghost {
-    @apply btn bg-white/50 backdrop-blur border border-white/70 text-brand-800 hover:bg-white/80;
+    @apply btn bg-white/60 backdrop-blur border border-white/70 text-brand-800 hover:bg-white/90;
   }
   .btn-soft {
     @apply btn bg-brand-50 text-brand-700 hover:bg-brand-100;
@@ -89,13 +107,15 @@ body {
   .btn-danger {
     @apply btn bg-red-50 text-red-600 hover:bg-red-100;
   }
-  .btn-sm {
-    @apply px-3 py-1.5 text-xs;
-  }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
 
   /* Champs de formulaire */
   .input, .select, .textarea {
-    @apply w-full rounded-xl border border-brand-100 bg-white/70 px-3.5 py-2.5 text-sm text-brand-900 placeholder:text-brand-400/70 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-300/40;
+    @apply w-full rounded-xl border border-brand-100 bg-white/70 px-3.5 py-2.5 text-sm text-brand-900 placeholder:text-brand-400/70 outline-none transition;
+  }
+  .input:focus, .select:focus, .textarea:focus {
+    border-color: rgba(255, 126, 62, 0.7);
+    box-shadow: 0 0 0 3px rgba(255, 106, 26, 0.16);
   }
   .label {
     @apply block text-xs font-semibold text-brand-700 mb-1.5;
@@ -114,16 +134,127 @@ body {
     @apply bg-gradient-to-r from-brand-500 to-brand-600 text-white shadow-glow hover:from-brand-500 hover:text-white;
   }
 
-  .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-glass;
+  .card-hover { @apply transition-all duration-300; }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -20px rgba(16, 90, 60, 0.35), 0 0 0 1px rgba(255, 106, 26, 0.14);
   }
 }
 
 /* Barre de défilement fine */
 ::-webkit-scrollbar { width: 9px; height: 9px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(22, 181, 99, 0.25); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(22, 181, 99, 0.45); }
+::-webkit-scrollbar-thumb { background: rgba(255, 106, 26, 0.28); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 106, 26, 0.45); }
 
-/* Recharts: retirer l'outline */
+/* Recharts : retirer l'outline (thème clair par défaut) */
 .recharts-surface { outline: none; }
+.recharts-default-tooltip {
+  border-radius: 12px !important;
+  border: 1px solid rgba(16, 90, 60, 0.12) !important;
+  box-shadow: 0 10px 30px -12px rgba(16, 90, 60, 0.35) !important;
+}
+
+/* ============================================================
+   AIDES LANDING / EFFETS "3D" (thème clair)
+   ============================================================ */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(10, 90, 60, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 90, 60, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.grid-overlay-fade {
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+}
+.mono-tag {
+  font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(11, 76, 48, 0.72);
+}
+.text-gradient-accent {
+  background: linear-gradient(120deg, #ff8a4c, #ff6a1a 55%, #e0490a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-green {
+  background: linear-gradient(120deg, #1fc874, #16b563 60%, #0a7543);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Reticle de sélection (poignées vertes, façon outil de design) */
+.reticle { position: absolute; inset: -10px; pointer-events: none; }
+.reticle span {
+  position: absolute; width: 12px; height: 12px;
+  border: 2px solid #16b563; background: #ffffff; border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(16, 90, 60, 0.25);
+}
+.reticle span:nth-child(1) { top: 0; left: 0; }
+.reticle span:nth-child(2) { top: 0; right: 0; }
+.reticle span:nth-child(3) { bottom: 0; left: 0; }
+.reticle span:nth-child(4) { bottom: 0; right: 0; }
+
+/* ============================================================
+   Cristal 3D réel (octaèdre / diamant) — substitut "modele_3d.glb"
+   8 facettes triangulaires : 4 dessus (orange) + 4 dessous (vert).
+   NB : ne PAS appliquer filter/opacity sur .gem -> cela aplatirait
+   le preserve-3d. La perspective est portée par transform.
+   ============================================================ */
+.scene-3d { perspective: 1100px; }
+.gem {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: gem-rotate 16s linear infinite;
+}
+@keyframes gem-rotate {
+  from { transform: perspective(900px) rotateX(-14deg) rotateY(0deg); }
+  to   { transform: perspective(900px) rotateX(-14deg) rotateY(360deg); }
+}
+.gem-pyr { position: absolute; inset: 0; transform-style: preserve-3d; }
+.gem-pyr.bottom { transform: rotateX(180deg); }
+
+/* Une facette = triangle isocèle (bordures CSS), pivot = milieu de la base */
+.gem-facet {
+  position: absolute; left: 50%; top: 50%;
+  width: 0; height: 0;
+  margin-left: -85px; margin-top: -150px;
+  border-left: 85px solid transparent;
+  border-right: 85px solid transparent;
+  border-bottom: 150px solid rgba(255, 138, 76, 0.92);
+  transform-origin: 50% 100%;
+  backface-visibility: visible;
+}
+/* Inclinaison des 4 facettes autour de l'axe vertical (octaèdre : 54.74°) */
+.gem-facet:nth-child(1) { transform: rotateY(0deg)   translateZ(85px) rotateX(-35.26deg); }
+.gem-facet:nth-child(2) { transform: rotateY(90deg)  translateZ(85px) rotateX(-35.26deg); }
+.gem-facet:nth-child(3) { transform: rotateY(180deg) translateZ(85px) rotateX(-35.26deg); }
+.gem-facet:nth-child(4) { transform: rotateY(270deg) translateZ(85px) rotateX(-35.26deg); }
+/* Éclairage simulé : teintes différentes par facette (orange dessus) */
+.gem-pyr.top .gem-facet:nth-child(1) { border-bottom-color: rgba(255, 178, 122, 0.96); }
+.gem-pyr.top .gem-facet:nth-child(2) { border-bottom-color: rgba(255, 138, 76, 0.93); }
+.gem-pyr.top .gem-facet:nth-child(3) { border-bottom-color: rgba(214, 70, 8, 0.9); }
+.gem-pyr.top .gem-facet:nth-child(4) { border-bottom-color: rgba(255, 116, 50, 0.93); }
+/* vert dessous */
+.gem-pyr.bottom .gem-facet:nth-child(1) { border-bottom-color: rgba(122, 232, 172, 0.96); }
+.gem-pyr.bottom .gem-facet:nth-child(2) { border-bottom-color: rgba(34, 200, 122, 0.93); }
+.gem-pyr.bottom .gem-facet:nth-child(3) { border-bottom-color: rgba(9, 130, 72, 0.9); }
+.gem-pyr.bottom .gem-facet:nth-child(4) { border-bottom-color: rgba(22, 181, 99, 0.93); }
+
+/* Bande défilante (marquee) sans coupure */
+.marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+
+/* Apparition au défilement */
+.reveal-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gem, .marquee-track, .animate-float, .animate-float-lg, .animate-spin-slow,
+  .animate-glow-pulse, .animate-marquee, .animate-gridpan { animation: none !important; }
+  .reveal-on-scroll { opacity: 1; transform: none; }
+}

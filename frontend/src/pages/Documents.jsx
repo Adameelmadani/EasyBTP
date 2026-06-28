@@ -31,7 +31,7 @@ export default function Documents() {
   return (
     <div>
       <PageHeader
-        title="Gestion documentaire" subtitle="Plans, PV, rapports, contrats — versionnés" icon={FolderOpen}
+        title="Gestion documentaire" subtitle="Plans, PV, rapports, contrats versionnés" icon={FolderOpen}
         actions={<div className="flex gap-2 flex-wrap">
           <ProjectPicker projects={projects} value={projectId} onChange={setProjectId} />
           <button className="btn-primary" onClick={() => setOpen(true)}><Plus size={18} /> Ajouter</button>

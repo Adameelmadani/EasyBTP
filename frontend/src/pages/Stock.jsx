@@ -70,8 +70,8 @@ export default function Stock() {
                   </td>
                   <td className="p-4 font-medium text-brand-900">{m.material?.designation}</td>
                   <td className="p-4 text-right font-semibold">{fmtNum(m.quantity)} {m.material?.unit}</td>
-                  <td className="p-4 text-brand-700/70">{m.project?.name || "—"}</td>
-                  <td className="p-4 text-brand-700/70">{m.reference || "—"}</td>
+                  <td className="p-4 text-brand-700/70">{m.project?.name || "-"}</td>
+                  <td className="p-4 text-brand-700/70">{m.reference || "-"}</td>
                   <td className="p-4 text-brand-700/70">{new Date(m.date).toLocaleDateString("fr-FR")}</td>
                 </tr>
               ))}
@@ -113,7 +113,7 @@ function MovementModal({ open, onClose, materials, projects, onSaved }) {
         </Field>
         <div className="grid grid-cols-2 gap-4">
           <Field label="Quantité *"><Input type="number" step="any" value={form.quantity || ""} onChange={set("quantity")} required /></Field>
-          <Field label="Projet"><Select value={form.projectId || ""} onChange={set("projectId")}><option value="">— Aucun —</option>{projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</Select></Field>
+          <Field label="Projet"><Select value={form.projectId || ""} onChange={set("projectId")}><option value="">- Aucun -</option>{projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</Select></Field>
         </div>
         <Field label="Référence"><Input value={form.reference || ""} onChange={set("reference")} placeholder="BL, BC..." /></Field>
         <Field label="Note"><Textarea value={form.note || ""} onChange={set("note")} /></Field>
