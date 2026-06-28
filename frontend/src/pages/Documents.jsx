@@ -15,15 +15,21 @@ export default function Documents() {
   const [docs, setDocs] = useState(null);
   const [category, setCategory] = useState("");
   const [q, setQ] = useState("");
+  const [query, setQuery] = useState(""); // valeur debouncée
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setQuery(q.trim()), 300);
+    return () => clearTimeout(t);
+  }, [q]);
 
   const load = () => {
     const params = { projectId };
     if (category) params.category = category;
-    if (q) params.q = q;
+    if (query) params.q = query;
     api.get("/documents", { params }).then((r) => setDocs(r.data)).catch(() => setDocs([]));
   };
-  useEffect(() => { if (projectId) load(); }, [projectId, category, q]);
+  useEffect(() => { if (projectId) load(); }, [projectId, category, query]);
 
   const sign = async (d) => { await api.patch(`/documents/${d.id}/sign`); load(); toast("Document signé électroniquement"); };
   const remove = async (d) => { if (!confirm("Supprimer ce document ?")) return; await api.delete(`/documents/${d.id}`); load(); toast("Document supprimé"); };

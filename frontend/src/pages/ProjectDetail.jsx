@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, MapPin, Calendar, Wallet, Ruler, Building2, Plus, TrendingUp,
-  Users2, Layers, Trash2, Pencil, ClipboardList, AlertTriangle, FolderOpen, Camera, Banknote,
+  Users2, Layers, Trash2, Pencil, X, AlertTriangle, FolderOpen, Camera, Banknote,
 } from "lucide-react";
 import api from "../api/client.js";
 import {
   Card, Spinner, Badge, ProgressBar, Tabs, Modal, Field, Input, Select, EmptyState, Avatar,
 } from "../components/ui.jsx";
+import ProjectFormModal from "../components/ProjectFormModal.jsx";
 import { PROJECT_STATUS, LOT_CATEGORIES, ROLE_LABELS, fmtMAD, fmtNum, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { hasRole } = useAuth();
   const [project, setProject] = useState(null);
   const [lots, setLots] = useState([]);
   const [users, setUsers] = useState([]);
@@ -22,6 +25,10 @@ export default function ProjectDetail() {
   const [lotModal, setLotModal] = useState(false);
   const [progressModal, setProgressModal] = useState(null);
   const [memberModal, setMemberModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+
+  const canEdit = hasRole("MAITRE_OUVRAGE", "ARCHITECTE", "BUREAU_ETUDES", "CONDUCTEUR_TRAVAUX", "ENTREPRISE");
+  const canDelete = hasRole("MAITRE_OUVRAGE");
 
   const load = () => {
     api.get(`/projects/${id}`).then((r) => setProject(r.data)).catch(() => navigate("/projects"));
@@ -43,11 +50,34 @@ export default function ProjectDetail() {
     load(); toast("Lot supprimé");
   };
 
+  const deleteProject = async () => {
+    if (!confirm(`Supprimer définitivement le projet « ${project.name} » ? Cette action est irréversible.`)) return;
+    try {
+      await api.delete(`/projects/${id}`);
+      toast("Projet supprimé");
+      navigate("/projects");
+    } catch (err) {
+      toast(err.response?.data?.message || "Suppression impossible", "error");
+    }
+  };
+
+  const removeMember = async (memberId) => {
+    if (!confirm("Retirer cet intervenant du projet ?")) return;
+    await api.delete(`/projects/${id}/members/${memberId}`);
+    load(); toast("Intervenant retiré");
+  };
+
   return (
     <div className="space-y-5">
-      <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline">
-        <ArrowLeft size={16} /> Retour aux projets
-      </Link>
+      <div className="flex items-center justify-between gap-3">
+        <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline">
+          <ArrowLeft size={16} /> Retour aux projets
+        </Link>
+        <div className="flex items-center gap-2">
+          {canEdit && <button className="btn-ghost btn-sm" onClick={() => setEditModal(true)}><Pencil size={15} /> Modifier</button>}
+          {canDelete && <button className="btn-danger btn-sm" onClick={deleteProject}><Trash2 size={15} /> Supprimer</button>}
+        </div>
+      </div>
 
       {/* Header */}
       <Card className="relative overflow-hidden">
@@ -165,12 +195,18 @@ export default function ProjectDetail() {
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {project.members.map((m) => (
-                <div key={m.id} className="flex items-center gap-3 p-3 rounded-2xl bg-white/50 border border-white/60">
+                <div key={m.id} className="group flex items-center gap-3 p-3 rounded-2xl bg-white/50 border border-white/60">
                   <Avatar name={`${m.user.firstName} ${m.user.lastName}`} size={42} />
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="font-semibold text-brand-900 truncate">{m.user.firstName} {m.user.lastName}</p>
-                    <p className="text-xs text-brand-700/60">{ROLE_LABELS[m.user.role]}</p>
+                    <p className="text-xs text-brand-700/60">{m.roleLabel || ROLE_LABELS[m.user.role]}</p>
                   </div>
+                  {canEdit && (
+                    <button onClick={() => removeMember(m.id)} title="Retirer"
+                      className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition shrink-0">
+                      <X size={16} />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -181,6 +217,7 @@ export default function ProjectDetail() {
       <LotModal open={lotModal} onClose={() => setLotModal(false)} projectId={id} onSaved={() => { setLotModal(false); load(); toast("Lot ajouté"); }} />
       <ProgressModal lot={progressModal} onClose={() => setProgressModal(null)} onSaved={() => { setProgressModal(null); load(); toast("Avancement enregistré"); }} />
       <MemberModal open={memberModal} onClose={() => setMemberModal(false)} projectId={id} users={users} existing={project.members} onSaved={() => { setMemberModal(false); load(); toast("Intervenant ajouté"); }} />
+      <ProjectFormModal open={editModal} project={project} onClose={() => setEditModal(false)} onSaved={() => { setEditModal(false); load(); toast("Projet mis à jour"); }} />
     </div>
   );
 }

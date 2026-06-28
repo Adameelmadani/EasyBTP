@@ -39,10 +39,10 @@ export default function Finance() {
 
       {summary && (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard label="Montant du marché" value={fmtMAD(summary.marketAmount)} icon={Banknote} tint="indigo" />
+          <StatCard label="Montant du marché" value={fmtMAD(summary.marketAmount)} icon={Banknote} tint="accent" />
           <StatCard label="Facturé (validé)" value={fmtMAD(summary.billed)} icon={Receipt} tint="brand" />
-          <StatCard label="Payé" value={fmtMAD(summary.paid)} icon={Wallet} tint="sky" />
-          <StatCard label="Reste à facturer" value={fmtMAD(summary.remaining)} icon={TrendingUp} tint="amber" />
+          <StatCard label="Payé" value={fmtMAD(summary.paid)} icon={Wallet} tint="brand" />
+          <StatCard label="Reste à facturer" value={fmtMAD(summary.remaining)} icon={TrendingUp} tint="accent" />
         </div>
       )}
 

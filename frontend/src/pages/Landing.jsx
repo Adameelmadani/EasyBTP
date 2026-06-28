@@ -127,7 +127,7 @@ export default function Landing() {
             <div className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
               <HardHat size={20} />
             </div>
-            <span className="font-display text-xl font-extrabold">Easy<span className="text-gradient-accent">BTP</span></span>
+            <span className="font-display text-xl font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
           </div>
           <div className="hidden md:flex items-center gap-1 ml-4 text-sm">
             <a href="#problemes" onClick={(e) => scrollToId(e, "problemes")} className="px-3 py-2 rounded-lg text-brand-700/80 hover:text-brand-900 hover:bg-brand-50 transition">Enjeux</a>
@@ -159,7 +159,7 @@ export default function Landing() {
               <span className="text-gradient-accent">sans approximation.</span>
             </h1>
             <p className="mt-6 text-base lg:text-lg text-brand-700/80 max-w-xl">
-              EasyBTP réunit avancement, réserves, documents, planning, approvisionnement et
+              VaiBTP réunit avancement, réserves, documents, planning, approvisionnement et
               finance dans une seule plateforme. Analytique, terrain et décisions — au même endroit.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -319,7 +319,7 @@ export default function Landing() {
               Prêt à piloter <span className="text-gradient-green">en temps réel</span> ?
             </h2>
             <p className="mt-4 text-brand-700/70 max-w-xl mx-auto">
-              Connectez-vous avec un compte de démonstration et explorez les 11 modules d'EasyBTP.
+              Connectez-vous avec un compte de démonstration et explorez les 11 modules de VaiBTP.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link to={appLink} className="btn-primary px-7 py-3.5 text-base">
@@ -341,9 +341,9 @@ export default function Landing() {
             <div className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
               <HardHat size={18} />
             </div>
-            <span className="font-display text-lg font-extrabold">Easy<span className="text-gradient-accent">BTP</span></span>
+            <span className="font-display text-lg font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
           </div>
-          <p className="font-mono text-xs text-brand-700/50">© 2026 EasyBTP — ENSAM S8 · Suivi de chantier de construction</p>
+          <p className="font-mono text-xs text-brand-700/50">© 2026 VaiBTP — ENSAM S8 · Suivi de chantier de construction</p>
           <div className="flex items-center gap-4 text-brand-700/70 text-sm">
             <span className="flex items-center gap-1.5"><MapPin size={14} className="text-brand-500" /> Maroc · MAD</span>
             <span className="flex items-center gap-1.5"><Bell size={14} className="text-accent-500" /> Temps réel</span>

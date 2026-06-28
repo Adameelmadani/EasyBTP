@@ -82,7 +82,7 @@ export default function Layout() {
             </div>
             <div>
               <p className="font-display font-extrabold text-lg leading-none">
-                <span className="text-brand-900">Easy</span><span className="text-gradient-accent">BTP</span>
+                <span className="text-brand-900">Via</span><span className="text-gradient-accent">BTP</span>
               </p>
               <p className="font-mono text-[10px] text-brand-700/60 mt-1 tracking-wider">[ suivi de chantier ]</p>
             </div>
@@ -117,7 +117,7 @@ export default function Layout() {
           </nav>
 
           <div className="p-3 border-t border-brand-100/60 text-center">
-            <p className="text-[10px] text-brand-700/40">EasyBTP © 2026 · v1.0</p>
+            <p className="text-[10px] text-brand-700/40">ViaBTP © 2026 · v1.0</p>
           </div>
         </div>
       </aside>

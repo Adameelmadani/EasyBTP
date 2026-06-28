@@ -11,20 +11,26 @@ export default function Materials() {
   const [suppliers, setSuppliers] = useState([]);
   const [valuation, setValuation] = useState(null);
   const [q, setQ] = useState("");
+  const [query, setQuery] = useState(""); // valeur debouncée
   const [category, setCategory] = useState("");
   const [lowOnly, setLowOnly] = useState(false);
   const [edit, setEdit] = useState(null);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const t = setTimeout(() => setQuery(q.trim()), 300);
+    return () => clearTimeout(t);
+  }, [q]);
+
   const load = () => {
     const params = {};
-    if (q) params.q = q;
+    if (query) params.q = query;
     if (category) params.category = category;
     if (lowOnly) params.lowStock = "true";
     api.get("/materials", { params }).then((r) => setMaterials(r.data)).catch(() => setMaterials([]));
     api.get("/stock/valuation").then((r) => setValuation(r.data)).catch(() => {});
   };
-  useEffect(() => { load(); }, [q, category, lowOnly]);
+  useEffect(() => { load(); }, [query, category, lowOnly]);
   useEffect(() => { api.get("/suppliers").then((r) => setSuppliers(r.data)); }, []);
 
   const remove = async (m) => { if (!confirm("Supprimer ce matériau ?")) return; await api.delete(`/materials/${m.id}`); load(); toast("Supprimé"); };
@@ -39,8 +45,8 @@ export default function Materials() {
       {valuation && (
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <StatCard label="Valeur du stock" value={fmtMAD(valuation.totalValue)} icon={Package} tint="brand" />
-          <StatCard label="Références" value={valuation.itemCount} icon={Package} tint="sky" />
-          <StatCard label="Stocks sous seuil" value={valuation.lowStockCount} icon={AlertTriangle} tint="red" />
+          <StatCard label="Références" value={valuation.itemCount} icon={Package} tint="brand" />
+          <StatCard label="Stocks sous seuil" value={valuation.lowStockCount} icon={AlertTriangle} tint="accent" />
         </div>
       )}
 

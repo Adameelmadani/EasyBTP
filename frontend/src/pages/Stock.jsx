@@ -33,8 +33,8 @@ export default function Stock() {
       {valuation && (
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <StatCard label="Valeur totale du stock" value={fmtMAD(valuation.totalValue)} icon={Boxes} tint="brand" />
-          <StatCard label="Références suivies" value={valuation.itemCount} icon={Boxes} tint="sky" />
-          <StatCard label="Alertes seuil" value={valuation.lowStockCount} icon={AlertTriangle} tint="red" />
+          <StatCard label="Références suivies" value={valuation.itemCount} icon={Boxes} tint="brand" />
+          <StatCard label="Alertes seuil" value={valuation.lowStockCount} icon={AlertTriangle} tint="accent" />
         </div>
       )}
 

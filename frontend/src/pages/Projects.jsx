@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Building2, Plus, Search, MapPin, Calendar, Users2, AlertTriangle, FolderOpen, Camera } from "lucide-react";
 import api from "../api/client.js";
-import { Card, PageHeader, Spinner, Badge, ProgressBar, Modal, Field, Input, Textarea, Select, EmptyState } from "../components/ui.jsx";
-import { PROJECT_STATUS, fmtMAD, enumToOptions } from "../lib/constants.js";
+import { Card, PageHeader, Spinner, Badge, ProgressBar, EmptyState } from "../components/ui.jsx";
+import ProjectFormModal from "../components/ProjectFormModal.jsx";
+import { PROJECT_STATUS, fmtMAD } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -12,16 +13,23 @@ export default function Projects() {
   const { hasRole } = useAuth();
   const [projects, setProjects] = useState(null);
   const [q, setQ] = useState("");
+  const [query, setQuery] = useState(""); // valeur debouncée
   const [status, setStatus] = useState("");
   const [open, setOpen] = useState(false);
 
+  // Debounce de la recherche : on n'interroge l'API qu'après une pause de saisie
+  useEffect(() => {
+    const t = setTimeout(() => setQuery(q.trim()), 300);
+    return () => clearTimeout(t);
+  }, [q]);
+
   const load = () => {
     const params = {};
-    if (q) params.q = q;
+    if (query) params.q = query;
     if (status) params.status = status;
     api.get("/projects", { params }).then((r) => setProjects(r.data)).catch(() => setProjects([]));
   };
-  useEffect(() => { load(); }, [q, status]);
+  useEffect(() => { load(); }, [query, status]);
 
   const canCreate = hasRole("MAITRE_OUVRAGE", "ARCHITECTE", "BUREAU_ETUDES", "CONDUCTEUR_TRAVAUX", "ENTREPRISE");
 
@@ -44,7 +52,14 @@ export default function Projects() {
       </div>
 
       {!projects ? <Spinner /> : projects.length === 0 ? (
-        <Card><EmptyState icon={Building2} title="Aucun projet" subtitle="Créez votre premier chantier pour commencer le suivi." /></Card>
+        <Card>
+          <EmptyState
+            icon={Building2}
+            title={query || status ? "Aucun projet ne correspond" : "Aucun projet"}
+            subtitle={query || status ? "Essayez d'ajuster votre recherche ou le filtre de statut." : "Créez votre premier chantier pour commencer le suivi."}
+            action={canCreate && !query && !status ? <button className="btn-primary" onClick={() => setOpen(true)}><Plus size={18} /> Nouveau projet</button> : null}
+          />
+        </Card>
       ) : (
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
           {projects.map((p) => (
@@ -84,52 +99,7 @@ export default function Projects() {
         </div>
       )}
 
-      <CreateProjectModal open={open} onClose={() => setOpen(false)} onCreated={() => { setOpen(false); load(); toast("Projet créé"); }} />
+      <ProjectFormModal open={open} onClose={() => setOpen(false)} onSaved={() => { setOpen(false); load(); toast("Projet créé"); }} />
     </div>
-  );
-}
-
-function CreateProjectModal({ open, onClose, onCreated }) {
-  const { toast } = useToast();
-  const [form, setForm] = useState({ status: "PLANIFIE" });
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-
-  const submit = async (e) => {
-    e.preventDefault();
-    try {
-      await api.post("/projects", form);
-      onCreated();
-      setForm({ status: "PLANIFIE" });
-    } catch (err) {
-      toast(err.response?.data?.message || "Erreur", "error");
-    }
-  };
-
-  return (
-    <Modal open={open} onClose={onClose} title="Nouveau projet" size="lg">
-      <form onSubmit={submit} className="grid sm:grid-cols-2 gap-4">
-        <Field label="Nom du projet *" className="sm:col-span-2"><Input value={form.name || ""} onChange={set("name")} required /></Field>
-        <Field label="Référence *"><Input value={form.reference || ""} onChange={set("reference")} placeholder="PRJ-2026-00X" required /></Field>
-        <Field label="Maître d'ouvrage / Client"><Input value={form.clientName || ""} onChange={set("clientName")} /></Field>
-        <Field label="Adresse" className="sm:col-span-2"><Input value={form.address || ""} onChange={set("address")} /></Field>
-        <Field label="Latitude GPS"><Input type="number" step="any" value={form.latitude || ""} onChange={set("latitude")} /></Field>
-        <Field label="Longitude GPS"><Input type="number" step="any" value={form.longitude || ""} onChange={set("longitude")} /></Field>
-        <Field label="Surface (m²)"><Input type="number" value={form.surface || ""} onChange={set("surface")} /></Field>
-        <Field label="Budget (MAD)"><Input type="number" value={form.budget || ""} onChange={set("budget")} /></Field>
-        <Field label="Montant du marché (MAD)"><Input type="number" value={form.marketAmount || ""} onChange={set("marketAmount")} /></Field>
-        <Field label="Statut">
-          <Select value={form.status} onChange={set("status")}>
-            {enumToOptions(PROJECT_STATUS).map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-          </Select>
-        </Field>
-        <Field label="Date de début"><Input type="date" value={form.startDate || ""} onChange={set("startDate")} /></Field>
-        <Field label="Date prévisionnelle de fin"><Input type="date" value={form.expectedEndDate || ""} onChange={set("expectedEndDate")} /></Field>
-        <Field label="Description" className="sm:col-span-2"><Textarea value={form.description || ""} onChange={set("description")} /></Field>
-        <div className="sm:col-span-2 flex justify-end gap-2 mt-2">
-          <button type="button" className="btn-ghost" onClick={onClose}>Annuler</button>
-          <button type="submit" className="btn-primary"><Plus size={18} /> Créer le projet</button>
-        </div>
-      </form>
-    </Modal>
   );
 }

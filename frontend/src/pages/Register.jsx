@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { HardHat, Loader2, ArrowRight } from "lucide-react";
+import { HardHat, ArrowRight, Loader2, Building2, ShieldCheck, BarChart3 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useToast } from "../context/ToastContext.jsx";
 import { ROLE_LABELS } from "../lib/constants.js";
@@ -30,67 +30,120 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen grid place-items-center p-6">
-      <div className="w-full max-w-lg">
-        <div className="flex items-center gap-3 mb-6 justify-center">
-          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
-            <HardHat size={26} />
+    <div className="min-h-screen grid lg:grid-cols-2">
+      {/* Hero gauche (identique à la page de connexion) */}
+      <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden text-brand-900">
+        {/* fond clair + halos + grille */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-accent-50" />
+        <div className="absolute inset-0 grid-overlay grid-overlay-fade opacity-80" />
+        <div className="absolute -top-24 -right-16 w-96 h-96 rounded-full bg-accent-300/30 blur-3xl animate-glow-pulse" />
+        <div className="absolute bottom-0 -left-10 w-80 h-80 rounded-full bg-brand-300/30 blur-3xl" />
+        {/* cristal 3D */}
+        <div className="scene-3d absolute top-1/2 right-10 -translate-y-1/2 w-64 h-64 animate-float-lg grid place-items-center">
+          <div className="gem w-[190px] h-[190px]">
+            <div className="gem-pyr top">
+              <span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" />
+            </div>
+            <div className="gem-pyr bottom">
+              <span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" /><span className="gem-facet" />
+            </div>
           </div>
-          <span className="font-display text-2xl font-extrabold text-brand-900">EasyBTP</span>
         </div>
 
-        <div className="glass-strong p-8">
-          <h2 className="text-2xl font-bold text-brand-900">Créer un compte</h2>
-          <p className="font-display text-sm text-brand-700/60 mt-1 mb-6">Rejoignez la plateforme de suivi de chantier.</p>
-
-          <form onSubmit={submit} className="space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="label">Prénom</label>
-                <input className="input" value={form.firstName} onChange={set("firstName")} required />
-              </div>
-              <div>
-                <label className="label">Nom</label>
-                <input className="input" value={form.lastName} onChange={set("lastName")} required />
-              </div>
-            </div>
-            <div>
-              <label className="label">Email</label>
-              <input className="input" type="email" value={form.email} onChange={set("email")} required />
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="label">Mot de passe</label>
-                <input className="input" type="password" value={form.password} onChange={set("password")} required minLength={6} />
-              </div>
-              <div>
-                <label className="label">Rôle</label>
-                <select className="select" value={form.role} onChange={set("role")}>
-                  {Object.entries(ROLE_LABELS).filter(([k]) => k !== "ADMIN").map(([k, v]) => (
-                    <option key={k} value={k}>{v}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="label">Société</label>
-                <input className="input" value={form.company} onChange={set("company")} />
-              </div>
-              <div>
-                <label className="label">Téléphone</label>
-                <input className="input" value={form.phone} onChange={set("phone")} />
-              </div>
-            </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full">
-              {loading ? <Loader2 className="animate-spin" size={18} /> : <>Créer mon compte <ArrowRight size={18} /></>}
-            </button>
-          </form>
-
-          <p className="text-center text-sm text-brand-700/70 mt-6">
-            Déjà inscrit ?{" "}
-            <Link to="/login" className="font-semibold text-brand-600 hover:underline">Se connecter</Link>
+        <div className="relative flex items-center gap-3">
+          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
+            <HardHat size={26} />
+          </div>
+          <span className="font-display text-2xl font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
+        </div>
+        <div className="relative">
+          <p className="mono-tag mb-3">[ plateforme de pilotage de chantier ]</p>
+          <h1 className="text-4xl font-extrabold leading-tight text-brand-900">
+            Pilotez vos chantiers <br /> <span className="text-gradient-accent">en temps réel.</span>
+          </h1>
+          <p className="text-sm mt-4 text-brand-700/80 max-w-md">
+            La plateforme centralisée de suivi de chantier : avancement, réserves, documents,
+            planning, approvisionnement et finance au même endroit.
           </p>
+          <div className="mt-8 space-y-3 max-w-sm">
+            {[
+              { icon: BarChart3, t: "Avancement physique & financier en direct" },
+              { icon: ShieldCheck, t: "Réserves, non-conformités & qualité" },
+              { icon: Building2, t: "Gestion multi-projets & intervenants" },
+            ].map((f, i) => (
+              <div key={i} className="flex items-center gap-3 bg-white/70 backdrop-blur rounded-2xl px-4 py-3 border border-brand-100 shadow-glass-sm">
+                <f.icon size={20} className="text-accent-500" />
+                <span className="text-sm font-medium text-brand-800">{f.t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 VaiBTP</p>
+      </div>
+
+      {/* Formulaire droite */}
+      <div className="flex items-center justify-center p-6 sm:p-12">
+        <div className="w-full max-w-lg">
+          <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
+            <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
+              <HardHat size={26} />
+            </div>
+            <span className="font-display text-2xl font-extrabold text-brand-900">Vai<span className="text-gradient-accent">BTP</span></span>
+          </div>
+
+          <div className="glass-strong p-8">
+            <h2 className="text-2xl font-bold text-brand-900">Créer un compte</h2>
+            <p className="font-display text-sm text-brand-700/60 mt-1 mb-6">Rejoignez la plateforme de suivi de chantier.</p>
+
+            <form onSubmit={submit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Prénom</label>
+                  <input className="input" value={form.firstName} onChange={set("firstName")} required />
+                </div>
+                <div>
+                  <label className="label">Nom</label>
+                  <input className="input" value={form.lastName} onChange={set("lastName")} required />
+                </div>
+              </div>
+              <div>
+                <label className="label">Email</label>
+                <input className="input" type="email" value={form.email} onChange={set("email")} required placeholder="vous@vaibtp.ma" />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Mot de passe</label>
+                  <input className="input" type="password" value={form.password} onChange={set("password")} required minLength={6} placeholder="••••••••" />
+                </div>
+                <div>
+                  <label className="label">Rôle</label>
+                  <select className="select" value={form.role} onChange={set("role")}>
+                    {Object.entries(ROLE_LABELS).filter(([k]) => k !== "ADMIN").map(([k, v]) => (
+                      <option key={k} value={k}>{v}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Société</label>
+                  <input className="input" value={form.company} onChange={set("company")} />
+                </div>
+                <div>
+                  <label className="label">Téléphone</label>
+                  <input className="input" value={form.phone} onChange={set("phone")} />
+                </div>
+              </div>
+              <button type="submit" disabled={loading} className="btn-primary w-full">
+                {loading ? <Loader2 className="animate-spin" size={18} /> : <>Créer mon compte <ArrowRight size={18} /></>}
+              </button>
+            </form>
+
+            <p className="text-center text-sm text-brand-700/70 mt-6">
+              Déjà inscrit ?{" "}
+              <Link to="/login" className="font-semibold text-brand-600 hover:underline">Se connecter</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

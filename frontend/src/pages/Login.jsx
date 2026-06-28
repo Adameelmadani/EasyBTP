@@ -57,7 +57,7 @@ export default function Login() {
           <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
             <HardHat size={26} />
           </div>
-          <span className="font-display text-2xl font-extrabold">Easy<span className="text-gradient-accent">BTP</span></span>
+          <span className="font-display text-2xl font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
         </div>
         <div className="relative">
           <p className="mono-tag mb-3">[ plateforme de pilotage de chantier ]</p>
@@ -81,7 +81,7 @@ export default function Login() {
             ))}
           </div>
         </div>
-        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 EasyBTP</p>
+        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 VaiBTP</p>
       </div>
 
       {/* Formulaire droite */}
@@ -91,7 +91,7 @@ export default function Login() {
             <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
               <HardHat size={26} />
             </div>
-            <span className="font-display text-2xl font-extrabold text-brand-900">EasyBTP</span>
+            <span className="font-display text-2xl font-extrabold text-brand-900">Vai<span className="text-gradient-accent">BTP</span></span>
           </div>
 
           <div className="glass-strong p-8">

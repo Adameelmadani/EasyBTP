@@ -7,7 +7,8 @@ import { useProjects } from "../lib/hooks.js";
 import { TASK_STATUS, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
 
-const STATUS_BAR = { A_FAIRE: "#94a3b8", EN_COURS: "#38bdf8", TERMINE: "#16b563", EN_RETARD: "#ef4444" };
+// Barres de Gantt : palette verte/orange (neutre pour « à faire »)
+const STATUS_BAR = { A_FAIRE: "#9fb3a8", EN_COURS: "#ff8a4c", TERMINE: "#16b563", EN_RETARD: "#f15206" };
 const DAY = 86400000;
 
 export default function Planning() {
