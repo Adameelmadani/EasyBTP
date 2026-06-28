@@ -124,10 +124,10 @@ export default function Landing() {
       {/* ====== NAV ====== */}
       <header className="sticky top-0 z-40 px-4 lg:px-8 py-4">
         <nav className="glass max-w-7xl mx-auto flex items-center gap-4 px-5 py-3">
-          <div className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center gap-2.5" title="Accueil ViaBTP">
             <Logo size={36} />
             <span className="font-display text-xl font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
-          </div>
+          </Link>
           <div className="hidden md:flex items-center gap-1 ml-4 text-sm">
             <a href="#problemes" onClick={(e) => scrollToId(e, "problemes")} className="px-3 py-2 rounded-lg text-brand-700/80 hover:text-brand-900 hover:bg-brand-50 transition">Enjeux</a>
             <a href="#solution" onClick={(e) => scrollToId(e, "solution")} className="px-3 py-2 rounded-lg text-brand-700/80 hover:text-brand-900 hover:bg-brand-50 transition">Solution</a>
@@ -333,10 +333,10 @@ export default function Landing() {
       {/* ====== FOOTER ====== */}
       <footer className="relative px-4 lg:px-8 py-10 border-t border-brand-100">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center gap-2.5" title="Accueil ViaBTP">
             <Logo size={36} />
             <span className="font-display text-lg font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
-          </div>
+          </Link>
           <p className="font-mono text-xs text-brand-700/50">© 2026 ViaBTP · Suivi de chantier de construction</p>
           <div className="flex items-center gap-4 text-brand-700/70 text-sm">
             <span className="flex items-center gap-1.5"><MapPin size={14} className="text-brand-500" /> Maroc</span>

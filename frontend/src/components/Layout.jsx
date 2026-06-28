@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate, Outlet } from "react-router-dom";
+import { NavLink, Link, useNavigate, Outlet } from "react-router-dom";
 import {
   LayoutDashboard, Building2, ClipboardList, AlertTriangle, FolderOpen, Camera,
   CalendarRange, Users2, Wallet, Package, Truck, ShoppingCart, Boxes, Warehouse,
@@ -78,13 +78,15 @@ export default function Layout() {
         <div className="h-full m-3 mr-0 lg:mr-3 glass-strong flex flex-col overflow-hidden">
           {/* Logo */}
           <div className="flex items-center gap-3 px-5 py-5 border-b border-brand-100/60">
-            <Logo size={44} rounded="rounded-2xl" />
-            <div>
-              <p className="font-display font-extrabold text-lg leading-none">
-                <span className="text-brand-900">Via</span><span className="text-gradient-accent">BTP</span>
-              </p>
-              <p className="font-mono text-[10px] text-brand-700/60 mt-1 tracking-wider">[ suivi de chantier ]</p>
-            </div>
+            <Link to="/" className="flex items-center gap-3 min-w-0" title="Accueil ViaBTP">
+              <Logo size={44} rounded="rounded-2xl" />
+              <div>
+                <p className="font-display font-extrabold text-lg leading-none">
+                  <span className="text-brand-900">Via</span><span className="text-gradient-accent">BTP</span>
+                </p>
+                <p className="font-mono text-[10px] text-brand-700/60 mt-1 tracking-wider">[ suivi de chantier ]</p>
+              </div>
+            </Link>
             <button className="ml-auto lg:hidden text-brand-600" onClick={() => setMobileOpen(false)}>
               <X size={22} />
             </button>

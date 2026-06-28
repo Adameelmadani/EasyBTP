@@ -51,10 +51,10 @@ export default function Register() {
           </div>
         </div>
 
-        <div className="relative flex items-center gap-3">
+        <Link to="/" className="relative flex items-center gap-3 w-fit" title="Accueil ViaBTP">
           <Logo size={48} rounded="rounded-2xl" />
           <span className="font-display text-2xl font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
-        </div>
+        </Link>
         <div className="relative">
           <p className="mono-tag mb-3">[ plateforme de pilotage de chantier ]</p>
           <h1 className="text-4xl font-extrabold leading-tight text-brand-900">
@@ -83,10 +83,10 @@ export default function Register() {
       {/* Formulaire droite */}
       <div className="flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-lg">
-          <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
+          <Link to="/" className="lg:hidden flex items-center gap-3 mb-8 justify-center" title="Accueil ViaBTP">
             <Logo size={48} rounded="rounded-2xl" />
             <span className="font-display text-2xl font-extrabold text-brand-900">Via<span className="text-gradient-accent">BTP</span></span>
-          </div>
+          </Link>
 
           <div className="glass-strong p-8">
             <h2 className="text-2xl font-bold text-brand-900">Créer un compte</h2>
