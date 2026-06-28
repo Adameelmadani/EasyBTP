@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { HardHat, ArrowRight, Loader2, Building2, ShieldCheck, BarChart3 } from "lucide-react";
+import { ArrowRight, Loader2, Building2, ShieldCheck, BarChart3 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
+import Logo from "../components/Logo.jsx";
 import { useToast } from "../context/ToastContext.jsx";
 import { ROLE_LABELS } from "../lib/constants.js";
 
@@ -51,10 +52,8 @@ export default function Register() {
         </div>
 
         <div className="relative flex items-center gap-3">
-          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
-            <HardHat size={26} />
-          </div>
-          <span className="font-display text-2xl font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
+          <Logo size={48} rounded="rounded-2xl" />
+          <span className="font-display text-2xl font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
         </div>
         <div className="relative">
           <p className="mono-tag mb-3">[ plateforme de pilotage de chantier ]</p>
@@ -78,17 +77,15 @@ export default function Register() {
             ))}
           </div>
         </div>
-        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 VaiBTP</p>
+        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 ViaBTP</p>
       </div>
 
       {/* Formulaire droite */}
       <div className="flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-lg">
           <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-            <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
-              <HardHat size={26} />
-            </div>
-            <span className="font-display text-2xl font-extrabold text-brand-900">Vai<span className="text-gradient-accent">BTP</span></span>
+            <Logo size={48} rounded="rounded-2xl" />
+            <span className="font-display text-2xl font-extrabold text-brand-900">Via<span className="text-gradient-accent">BTP</span></span>
           </div>
 
           <div className="glass-strong p-8">
@@ -108,7 +105,7 @@ export default function Register() {
               </div>
               <div>
                 <label className="label">Email</label>
-                <input className="input" type="email" value={form.email} onChange={set("email")} required placeholder="vous@vaibtp.ma" />
+                <input className="input" type="email" value={form.email} onChange={set("email")} required placeholder="vous@viabtp.ma" />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>

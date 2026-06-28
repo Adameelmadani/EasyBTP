@@ -1,10 +1,10 @@
-# EasyBTP: Plateforme de suivi de chantier de construction
+# ViaBTP: Plateforme de suivi de chantier de construction
 
 Application web complète de pilotage de chantiers (BTP): suivi d'avancement, réserves, gestion
 documentaire, planning, réunions, finance et **gestion complète de l'approvisionnement
 en matériaux**.
 
-Interface **glassmorphism** thème **blanc & vert**, multi-rôles, multi-projets.
+Interface **glassmorphism** thème **blanc, vert & orange**, multi-rôles, multi-projets.
 
 ---
 
@@ -64,15 +64,15 @@ Mot de passe pour tous : **`password123`**
 
 | Rôle | Email |
 |---|---|
-| Administrateur | `admin@easybtp.ma` |
-| Maître d'ouvrage | `mo@easybtp.ma` |
-| Architecte | `archi@easybtp.ma` |
-| Bureau d'études | `bet@easybtp.ma` |
-| Entreprise | `entreprise@easybtp.ma` |
-| Contrôle technique | `controle@easybtp.ma` |
-| Conducteur de travaux | `conducteur@easybtp.ma` |
-| Chef de chantier | `chef@easybtp.ma` |
-| Visiteur | `visiteur@easybtp.ma` |
+| Administrateur | `admin@viabtp.ma` |
+| Maître d'ouvrage | `mo@viabtp.ma` |
+| Architecte | `archi@viabtp.ma` |
+| Bureau d'études | `bet@viabtp.ma` |
+| Entreprise | `entreprise@viabtp.ma` |
+| Contrôle technique | `controle@viabtp.ma` |
+| Conducteur de travaux | `conducteur@viabtp.ma` |
+| Chef de chantier | `chef@viabtp.ma` |
+| Visiteur | `visiteur@viabtp.ma` |
 
 ---
 
@@ -98,7 +98,7 @@ Mot de passe pour tous : **`password123`**
 ## Structure du projet
 
 ```
-EasyBTP/
+ViaBTP/
 ├── docker-compose.yml        # PostgreSQL + Adminer
 ├── package.json              # scripts racine (setup, db:up, ...)
 ├── backend/
@@ -143,8 +143,8 @@ EasyBTP/
 
 ## Design
 
-- **Glassmorphism** : cartes translucides (`backdrop-blur`), bordures claires, halos verts.
-- **Palette** : blanc cassé + vert `brand` (`#16b563` → `#0a7543`).
+- **Glassmorphism** : cartes translucides (`backdrop-blur`), bordures claires, halos verts & orange.
+- **Palette** : blanc cassé + vert `brand` (`#16b563` → `#0a7543`) + orange `accent` (`#ff6a1a`).
 - **Responsive** : sidebar repliable, grilles fluides, optimisé terrain.
 - Typographie : **Quantify** pour les titres & sous-titres, **Inter** pour le corps de texte.
 - Animations douces, toasts, modales.
@@ -157,4 +157,4 @@ EasyBTP/
 - Pour basculer sur un PostgreSQL non-Docker, ajustez `DATABASE_URL` dans `backend/.env`.
 - `npx prisma studio` ouvre un explorateur visuel de la base.
 
-© 2026 EasyBTP
+© 2026 ViaBTP

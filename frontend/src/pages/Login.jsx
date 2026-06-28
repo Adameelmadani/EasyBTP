@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { HardHat, Mail, Lock, ArrowRight, Loader2, Building2, ShieldCheck, BarChart3 } from "lucide-react";
+import { Mail, Lock, ArrowRight, Loader2, Building2, ShieldCheck, BarChart3 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
+import Logo from "../components/Logo.jsx";
 import { useToast } from "../context/ToastContext.jsx";
 
 const DEMO = [
-  { label: "Administrateur", email: "admin@easybtp.ma" },
-  { label: "Conducteur de travaux", email: "conducteur@easybtp.ma" },
-  { label: "Chef de chantier", email: "chef@easybtp.ma" },
+  { label: "Administrateur", email: "admin@viabtp.ma" },
+  { label: "Conducteur de travaux", email: "conducteur@viabtp.ma" },
+  { label: "Chef de chantier", email: "chef@viabtp.ma" },
 ];
 
 export default function Login() {
   const { login } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("admin@easybtp.ma");
+  const [email, setEmail] = useState("admin@viabtp.ma");
   const [password, setPassword] = useState("password123");
   const [loading, setLoading] = useState(false);
 
@@ -54,10 +55,8 @@ export default function Login() {
         </div>
 
         <div className="relative flex items-center gap-3">
-          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
-            <HardHat size={26} />
-          </div>
-          <span className="font-display text-2xl font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
+          <Logo size={48} rounded="rounded-2xl" />
+          <span className="font-display text-2xl font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
         </div>
         <div className="relative">
           <p className="mono-tag mb-3">[ plateforme de pilotage de chantier ]</p>
@@ -81,17 +80,15 @@ export default function Login() {
             ))}
           </div>
         </div>
-        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 VaiBTP</p>
+        <p className="relative text-xs text-brand-700/50 font-mono">© 2026 ViaBTP</p>
       </div>
 
       {/* Formulaire droite */}
       <div className="flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-md">
           <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-            <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow">
-              <HardHat size={26} />
-            </div>
-            <span className="font-display text-2xl font-extrabold text-brand-900">Vai<span className="text-gradient-accent">BTP</span></span>
+            <Logo size={48} rounded="rounded-2xl" />
+            <span className="font-display text-2xl font-extrabold text-brand-900">Via<span className="text-gradient-accent">BTP</span></span>
           </div>
 
           <div className="glass-strong p-8">
@@ -103,7 +100,7 @@ export default function Login() {
                 <label className="label">Adresse email</label>
                 <div className="relative">
                   <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-400" />
-                  <input className="input pl-10" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="vous@easybtp.ma" />
+                  <input className="input pl-10" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="vous@viabtp.ma" />
                 </div>
               </div>
               <div>

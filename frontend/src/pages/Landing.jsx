@@ -6,6 +6,7 @@ import {
   Activity, Cpu, Cube, Chart, Sparkles, MapPin, Bell,
 } from "../components/icons.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
+import Logo from "../components/Logo.jsx";
 
 /* Révélation au défilement */
 function useReveal() {
@@ -86,7 +87,7 @@ function Gem() {
           <div className="reticle">
             <span /><span /><span /><span />
           </div>
-          <span className="absolute -top-7 left-0 mono-tag text-brand-700">modele_3d.glb</span>
+          <span className="absolute -top-7 left-0 mono-tag text-brand-700">via_btp</span>
         </div>
       </div>
       {/* SVG : trajectoire animée (façon carte de vol) */}
@@ -124,10 +125,8 @@ export default function Landing() {
       <header className="sticky top-0 z-40 px-4 lg:px-8 py-4">
         <nav className="glass max-w-7xl mx-auto flex items-center gap-4 px-5 py-3">
           <div className="flex items-center gap-2.5">
-            <div className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
-              <HardHat size={20} />
-            </div>
-            <span className="font-display text-xl font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
+            <Logo size={36} />
+            <span className="font-display text-xl font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
           </div>
           <div className="hidden md:flex items-center gap-1 ml-4 text-sm">
             <a href="#problemes" onClick={(e) => scrollToId(e, "problemes")} className="px-3 py-2 rounded-lg text-brand-700/80 hover:text-brand-900 hover:bg-brand-50 transition">Enjeux</a>
@@ -151,16 +150,13 @@ export default function Landing() {
         <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           {/* texte */}
           <div className="animate-reveal">
-            <p className="mono-tag inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-100 bg-white/70">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-500" /> plateforme de suivi de chantier · BTP
-            </p>
             <h1 className="mt-6 font-display text-5xl lg:text-6xl font-extrabold leading-[1.05] text-brand-900">
               Le pilotage de chantier,<br />
               <span className="text-gradient-accent">sans approximation.</span>
             </h1>
             <p className="mt-6 text-base lg:text-lg text-brand-700/80 max-w-xl">
-              VaiBTP réunit avancement, réserves, documents, planning, approvisionnement et
-              finance dans une seule plateforme. Analytique, terrain et décisions — au même endroit.
+              ViaBTP réunit avancement, réserves, documents, planning, approvisionnement et
+              finance dans une seule plateforme. Analytique, terrain et décisions, au même endroit.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link to={appLink} className="btn-primary px-6 py-3 text-base">
@@ -319,7 +315,7 @@ export default function Landing() {
               Prêt à piloter <span className="text-gradient-green">en temps réel</span> ?
             </h2>
             <p className="mt-4 text-brand-700/70 max-w-xl mx-auto">
-              Connectez-vous avec un compte de démonstration et explorez les 11 modules de VaiBTP.
+              Connectez-vous avec un compte de démonstration et explorez les 11 modules de ViaBTP.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link to={appLink} className="btn-primary px-7 py-3.5 text-base">
@@ -329,7 +325,7 @@ export default function Landing() {
                 <Link to="/register" className="btn-ghost px-7 py-3.5 text-base">Créer un compte</Link>
               )}
             </div>
-            <p className="mt-6 font-mono text-xs text-brand-700/50">admin@easybtp.ma · password123</p>
+            <p className="mt-6 font-mono text-xs text-brand-700/50">Le pilotage de chantier, sans approximation.</p>
           </div>
         </div>
       </section>
@@ -338,14 +334,12 @@ export default function Landing() {
       <footer className="relative px-4 lg:px-8 py-10 border-t border-brand-100">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
-              <HardHat size={18} />
-            </div>
-            <span className="font-display text-lg font-extrabold">Vai<span className="text-gradient-accent">BTP</span></span>
+            <Logo size={36} />
+            <span className="font-display text-lg font-extrabold">Via<span className="text-gradient-accent">BTP</span></span>
           </div>
-          <p className="font-mono text-xs text-brand-700/50">© 2026 VaiBTP — ENSAM S8 · Suivi de chantier de construction</p>
+          <p className="font-mono text-xs text-brand-700/50">© 2026 ViaBTP · Suivi de chantier de construction</p>
           <div className="flex items-center gap-4 text-brand-700/70 text-sm">
-            <span className="flex items-center gap-1.5"><MapPin size={14} className="text-brand-500" /> Maroc · MAD</span>
+            <span className="flex items-center gap-1.5"><MapPin size={14} className="text-brand-500" /> Maroc</span>
             <span className="flex items-center gap-1.5"><Bell size={14} className="text-accent-500" /> Temps réel</span>
           </div>
         </div>

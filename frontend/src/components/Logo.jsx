@@ -1,4 +1,4 @@
-// Logo ViaBTP (image favicon.png) — badge blanc arrondi.
+// Logo ViaBTP (image favicon.png), badge blanc arrondi.
 export default function Logo({ size = 44, rounded = "rounded-xl", className = "" }) {
   return (
     <img

@@ -3,11 +3,12 @@ import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import {
   LayoutDashboard, Building2, ClipboardList, AlertTriangle, FolderOpen, Camera,
   CalendarRange, Users2, Wallet, Package, Truck, ShoppingCart, Boxes, Warehouse,
-  ScrollText, Bell, LogOut, Menu, X, ChevronDown, HardHat,
+  ScrollText, Bell, LogOut, Menu, X, ChevronDown,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import api from "../api/client.js";
 import { Avatar } from "./ui.jsx";
+import Logo from "./Logo.jsx";
 import { ROLE_LABELS } from "../lib/constants.js";
 
 const NAV = [
@@ -77,9 +78,7 @@ export default function Layout() {
         <div className="h-full m-3 mr-0 lg:mr-3 glass-strong flex flex-col overflow-hidden">
           {/* Logo */}
           <div className="flex items-center gap-3 px-5 py-5 border-b border-brand-100/60">
-            <div className="grid place-items-center w-11 h-11 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green">
-              <HardHat size={24} />
-            </div>
+            <Logo size={44} rounded="rounded-2xl" />
             <div>
               <p className="font-display font-extrabold text-lg leading-none">
                 <span className="text-brand-900">Via</span><span className="text-gradient-accent">BTP</span>

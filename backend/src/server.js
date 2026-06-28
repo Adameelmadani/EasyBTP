@@ -9,7 +9,7 @@ async function start() {
     await prisma.$connect();
     console.log("Base de données connectée");
     app.listen(PORT, () => {
-      console.log(`EasyBTP API en écoute sur http://localhost:${PORT}`);
+      console.log(`ViaBTP API en écoute sur http://localhost:${PORT}`);
       console.log(`   Health: http://localhost:${PORT}/api/health`);
     });
   } catch (e) {

@@ -41,7 +41,7 @@ if (process.env.NODE_ENV !== "test") app.use(morgan("dev"));
 app.use("/uploads", express.static(uploadDir));
 
 // Healthcheck
-app.get("/api/health", (req, res) => res.json({ status: "ok", service: "EasyBTP API", time: new Date() }));
+app.get("/api/health", (req, res) => res.json({ status: "ok", service: "ViaBTP API", time: new Date() }));
 
 // Routes API
 app.use("/api/auth", authRoutes);

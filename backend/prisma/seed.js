@@ -37,15 +37,15 @@ async function main() {
 
   console.log("Création des utilisateurs...");
   const usersData = [
-    { email: "admin@easybtp.ma", role: "ADMIN", firstName: "Adam", lastName: "Elmadani", company: "EasyBTP", phone: "+212 600-000000" },
-    { email: "mo@easybtp.ma", role: "MAITRE_OUVRAGE", firstName: "Yassine", lastName: "Bennani", company: "Al Omrane", phone: "+212 661-112233" },
-    { email: "archi@easybtp.ma", role: "ARCHITECTE", firstName: "Salma", lastName: "El Fassi", company: "Atelier Archi+", phone: "+212 662-445566" },
-    { email: "bet@easybtp.ma", role: "BUREAU_ETUDES", firstName: "Karim", lastName: "Tazi", company: "BET Structura", phone: "+212 663-778899" },
-    { email: "entreprise@easybtp.ma", role: "ENTREPRISE", firstName: "Hicham", lastName: "Alaoui", company: "STGM Construction", phone: "+212 664-101010" },
-    { email: "controle@easybtp.ma", role: "CONTROLE_TECHNIQUE", firstName: "Nadia", lastName: "Cherkaoui", company: "Socotec Maroc", phone: "+212 665-202020" },
-    { email: "conducteur@easybtp.ma", role: "CONDUCTEUR_TRAVAUX", firstName: "Omar", lastName: "Idrissi", company: "STGM Construction", phone: "+212 666-303030" },
-    { email: "chef@easybtp.ma", role: "CHEF_CHANTIER", firstName: "Rachid", lastName: "Mansouri", company: "STGM Construction", phone: "+212 667-404040" },
-    { email: "visiteur@easybtp.ma", role: "VISITEUR", firstName: "Leila", lastName: "Saidi", company: "Invité", phone: "+212 668-505050" },
+    { email: "admin@viabtp.ma", role: "ADMIN", firstName: "Adam", lastName: "Elmadani", company: "ViaBTP", phone: "+212 600-000000" },
+    { email: "mo@viabtp.ma", role: "MAITRE_OUVRAGE", firstName: "Yassine", lastName: "Bennani", company: "Al Omrane", phone: "+212 661-112233" },
+    { email: "archi@viabtp.ma", role: "ARCHITECTE", firstName: "Salma", lastName: "El Fassi", company: "Atelier Archi+", phone: "+212 662-445566" },
+    { email: "bet@viabtp.ma", role: "BUREAU_ETUDES", firstName: "Karim", lastName: "Tazi", company: "BET Structura", phone: "+212 663-778899" },
+    { email: "entreprise@viabtp.ma", role: "ENTREPRISE", firstName: "Hicham", lastName: "Alaoui", company: "STGM Construction", phone: "+212 664-101010" },
+    { email: "controle@viabtp.ma", role: "CONTROLE_TECHNIQUE", firstName: "Nadia", lastName: "Cherkaoui", company: "Socotec Maroc", phone: "+212 665-202020" },
+    { email: "conducteur@viabtp.ma", role: "CONDUCTEUR_TRAVAUX", firstName: "Omar", lastName: "Idrissi", company: "STGM Construction", phone: "+212 666-303030" },
+    { email: "chef@viabtp.ma", role: "CHEF_CHANTIER", firstName: "Rachid", lastName: "Mansouri", company: "STGM Construction", phone: "+212 667-404040" },
+    { email: "visiteur@viabtp.ma", role: "VISITEUR", firstName: "Leila", lastName: "Saidi", company: "Invité", phone: "+212 668-505050" },
   ];
   const users = {};
   for (const u of usersData) {

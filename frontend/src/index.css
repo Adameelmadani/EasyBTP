@@ -200,7 +200,7 @@ body {
 .reticle span:nth-child(4) { bottom: 0; right: 0; }
 
 /* ============================================================
-   Cristal 3D réel (octaèdre / diamant) — substitut "modele_3d.glb"
+   Cristal 3D réel (octaèdre / diamant), substitut "modele_3d.glb"
    8 facettes triangulaires : 4 dessus (orange) + 4 dessous (vert).
    NB : ne PAS appliquer filter/opacity sur .gem -> cela aplatirait
    le preserve-3d. La perspective est portée par transform.

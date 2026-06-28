@@ -1,5 +1,5 @@
 /**
- * Jeu d'icônes maison "VaiBTP" — dessinées à la main (chantier / BTP).
+ * Jeu d'icônes maison "ViaBTP", dessinées à la main (chantier / BTP).
  * Pas de bibliothèque externe. SVG inline (sans xmlns), trait = currentColor,
  * donc les icônes héritent de la couleur du texte (blanc sur tuiles, etc.).
  */

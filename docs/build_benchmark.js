@@ -123,12 +123,12 @@ children.push(
   }),
   new Paragraph({
     alignment: AlignmentType.CENTER, spacing: { after: 100 },
-    children: [new TextRun({ text: "Analyse comparative du marché — fonctionnalités, solutions existantes et limites", size: 22, color: TXT })],
+    children: [new TextRun({ text: "Analyse comparative du marché, fonctionnalités, solutions existantes et limites", size: 22, color: TXT })],
   }),
   new Paragraph({ spacing: { before: 1400 } }),
   new Paragraph({
     alignment: AlignmentType.CENTER, spacing: { after: 60 },
-    children: [new TextRun({ text: "ENSAM — Projet de Semestre 8", size: 22, bold: true, color: TXT })],
+    children: [new TextRun({ text: "ENSAM, Projet de Semestre 8", size: 22, bold: true, color: TXT })],
   }),
   new Paragraph({
     alignment: AlignmentType.CENTER, spacing: { after: 60 },
@@ -152,7 +152,7 @@ children.push(
 children.push(
   h1("1. Introduction et méthodologie"),
   h2("1.1. Contexte"),
-  p("Le secteur du Bâtiment et des Travaux Publics (BTP) connaît une transformation numérique profonde. Au Maroc, cette dynamique est portée par d'importants programmes d'infrastructures — Plan Maroc 2030, préparation de la Coupe du Monde 2030 (stades, autoroutes, ligne à grande vitesse, hôtellerie) — qui multiplient le nombre et la complexité des chantiers à piloter. Pourtant, dans de nombreuses économies émergentes, plus de 55 % des petits entrepreneurs s'appuient encore sur des procédés manuels ou de simples tableurs pour le suivi de leurs projets."),
+  p("Le secteur du Bâtiment et des Travaux Publics (BTP) connaît une transformation numérique profonde. Au Maroc, cette dynamique est portée par d'importants programmes d'infrastructures, Plan Maroc 2030, préparation de la Coupe du Monde 2030 (stades, autoroutes, ligne à grande vitesse, hôtellerie), qui multiplient le nombre et la complexité des chantiers à piloter. Pourtant, dans de nombreuses économies émergentes, plus de 55 % des petits entrepreneurs s'appuient encore sur des procédés manuels ou de simples tableurs pour le suivi de leurs projets."),
   p("Dans ce contexte, EasyBTP est une plateforme web de pilotage de chantier conçue à partir du Cahier des Prescriptions Techniques (CPT) du projet. Elle vise à centraliser, structurer et fluidifier le suivi de l'avancement physique et financier, la gestion documentaire, les réserves, le planning, les réunions, la finance et l'approvisionnement en matériaux."),
   h2("1.2. Objectif du benchmarking"),
   p("Ce document a pour objet de positionner EasyBTP au sein de l'offre logicielle existante. Il poursuit trois objectifs :"),
@@ -207,7 +207,7 @@ children.push(
 
   h3("Procore"),
   p([run("Origine / cible : ", { bold: true }), run("États-Unis ; grandes entreprises générales et projets commerciaux d'envergure (> 10 M$). Solution de référence du marché.")]),
-  p([run("Fonctionnalités clés : ", { bold: true }), run("plateforme tout-en-un très riche — gestion de projet, documents et plans, RFI/soumissions, qualité et sécurité, finance et budget, planning, gestion des sous-traitants, large écosystème d'intégrations.")]),
+  p([run("Fonctionnalités clés : ", { bold: true }), run("plateforme tout-en-un très riche, gestion de projet, documents et plans, RFI/soumissions, qualité et sécurité, finance et budget, planning, gestion des sous-traitants, large écosystème d'intégrations.")]),
   p([run("Limites / problèmes : ", { bold: true }), run("coût très élevé et tarification opaque (devis sur volume annuel, de l'ordre de 4 500 à 10 000 $/an pour les petites structures, bien plus pour l'entreprise) ; surdimensionné pour les TPE/PME et les corps d'état spécialisés ; courbe d'apprentissage et onboarding lourds ; interface jugée parfois lente (rechargements de page, aperçu PDF limité) ; service client critiqué sur les délais.")]),
 
   h3("Autodesk Construction Cloud / Autodesk Build (ex-BIM 360 + PlanGrid)"),
@@ -218,12 +218,12 @@ children.push(
   h3("Buildertrend"),
   p([run("Origine / cible : ", { bold: true }), run("États-Unis ; constructeurs résidentiels et petits projets commerciaux, relation client (maître d'ouvrage particulier).")]),
   p([run("Fonctionnalités clés : ", { bold: true }), run("portail client, planification, suivi des sélections, communication, suivi financier et facturation ; expérience intuitive orientée maître d'ouvrage.")]),
-  p([run("Limites / problèmes : ", { bold: true }), run("abonnement élevé (de l'ordre de 449 à 499 $/mois) ; pensé pour le résidentiel — moins adapté aux grands chantiers d'infrastructure ou aux logiques de marché public ; couverture BIM/coordination limitée.")]),
+  p([run("Limites / problèmes : ", { bold: true }), run("abonnement élevé (de l'ordre de 449 à 499 $/mois) ; pensé pour le résidentiel, moins adapté aux grands chantiers d'infrastructure ou aux logiques de marché public ; couverture BIM/coordination limitée.")]),
 
   h3("Fieldwire (by Hilti)"),
   p([run("Origine / cible : ", { bold: true }), run("États-Unis ; équipes terrain, conducteurs de travaux et chefs de chantier.")]),
   p([run("Fonctionnalités clés : ", { bold: true }), run("consultation de plans, gestion des tâches et punch lists (réserves), rapports, RFI et ordres de changement, visualisation de modèles 3D, mode hors-ligne fiable ; réputé pour sa simplicité (très bonnes notes d'ergonomie).")]),
-  p([run("Limites / problèmes : ", { bold: true }), run("centré sur l'exécution terrain — couverture plus faible de la finance, de la comptabilité et de l'ERP ; nécessite souvent d'être complété par d'autres outils pour le pilotage global de l'entreprise.")]),
+  p([run("Limites / problèmes : ", { bold: true }), run("centré sur l'exécution terrain, couverture plus faible de la finance, de la comptabilité et de l'ERP ; nécessite souvent d'être complété par d'autres outils pour le pilotage global de l'entreprise.")]),
 
   h2("3.2. Solutions françaises et européennes"),
 
@@ -245,7 +245,7 @@ children.push(
   h3("Graneet"),
   p([run("Cible : ", { bold: true }), run("PME du BTP, pilotage financier et rentabilité.")]),
   p([run("Points forts : ", { bold: true }), run("suivi des marges par chantier (budget, commandes, factures, encaissements), pointage des heures simplifié, facturation de situation et avancement automatisé.")]),
-  p([run("Limites : ", { bold: true }), run("expert du volet financier/administratif — suivi terrain (réserves, photos géolocalisées), planning Gantt et BIM peu ou pas couverts.")]),
+  p([run("Limites : ", { bold: true }), run("expert du volet financier/administratif, suivi terrain (réserves, photos géolocalisées), planning Gantt et BIM peu ou pas couverts.")]),
 
   h3("Archipad"),
   p([run("Cible : ", { bold: true }), run("architectes, bureaux de contrôle et maîtrise d'œuvre ; suivi terrain sur tablette.")]),
@@ -280,17 +280,17 @@ children.push(
     [1650, 1900, 2700, 2776],
     ["Solution", "Origine / cible", "Points forts", "Limites principales"],
     [
-      ["Procore", "USA — grands GC", "Tout-en-un, riche, écosystème", "Très cher, opaque, lourd, complexe"],
-      ["Autodesk Build", "USA — BIM / design-build", "BIM 3D, AutoCAD/Revit natif", "Coûteux, complexe, écosystème Autodesk"],
-      ["Buildertrend", "USA — résidentiel", "Portail client, simple", "Cher, peu adapté infrastructure"],
-      ["Fieldwire", "USA — terrain", "Ergonomie, hors-ligne, plans", "Faible sur finance/ERP"],
-      ["Finalcad", "France — terrain/qualité", "Mobile, NC, workflows", "Finance/achats partiels"],
-      ["Vertuoza", "Belgique/FR — PME", "Marges temps réel, gestion globale", "BIM/IA limités"],
-      ["Graneet", "France — PME finance", "Rentabilité, facturation situation", "Terrain/planning/BIM faibles"],
-      ["Archipad", "France — MOE/contrôle", "Réserves sur plans, PV", "Spécialisé réception"],
-      ["MarocBTP", "Maroc — TPE/PME", "MAD, prix accessible, local", "Périmètre restreint, pas de BIM/IA"],
-      ["EBP Maroc", "Maroc — bâtiment", "Devis/facture, localisé", "Orienté compta, terrain limité"],
-      [{ text: "EasyBTP", bold: true, color: BRAND_DARK }, { text: "Maroc — académique", bold: true }, { text: "11 modules CPT, multilingue FR/AR/EN, MAD, approvisionnement complet", bold: true }, { text: "Projet académique : BIM/IA/IoT en cible", bold: true }],
+      ["Procore", "USA, grands GC", "Tout-en-un, riche, écosystème", "Très cher, opaque, lourd, complexe"],
+      ["Autodesk Build", "USA, BIM / design-build", "BIM 3D, AutoCAD/Revit natif", "Coûteux, complexe, écosystème Autodesk"],
+      ["Buildertrend", "USA, résidentiel", "Portail client, simple", "Cher, peu adapté infrastructure"],
+      ["Fieldwire", "USA, terrain", "Ergonomie, hors-ligne, plans", "Faible sur finance/ERP"],
+      ["Finalcad", "France, terrain/qualité", "Mobile, NC, workflows", "Finance/achats partiels"],
+      ["Vertuoza", "Belgique/FR, PME", "Marges temps réel, gestion globale", "BIM/IA limités"],
+      ["Graneet", "France, PME finance", "Rentabilité, facturation situation", "Terrain/planning/BIM faibles"],
+      ["Archipad", "France, MOE/contrôle", "Réserves sur plans, PV", "Spécialisé réception"],
+      ["MarocBTP", "Maroc, TPE/PME", "MAD, prix accessible, local", "Périmètre restreint, pas de BIM/IA"],
+      ["EBP Maroc", "Maroc, bâtiment", "Devis/facture, localisé", "Orienté compta, terrain limité"],
+      [{ text: "EasyBTP", bold: true, color: BRAND_DARK }, { text: "Maroc, académique", bold: true }, { text: "11 modules CPT, multilingue FR/AR/EN, MAD, approvisionnement complet", bold: true }, { text: "Projet académique : BIM/IA/IoT en cible", bold: true }],
     ]
   ),
   p(""),
@@ -324,7 +324,7 @@ children.push(
 // ---------- 5. PROBLEMES COMMUNS ----------
 children.push(
   h1("5. Problèmes et limites communs des solutions existantes"),
-  p("Au-delà des spécificités de chaque produit, la revue fait ressortir des problèmes récurrents qui freinent l'adoption des logiciels de gestion de chantier — autant d'axes d'opportunité pour EasyBTP."),
+  p("Au-delà des spécificités de chaque produit, la revue fait ressortir des problèmes récurrents qui freinent l'adoption des logiciels de gestion de chantier, autant d'axes d'opportunité pour EasyBTP."),
   h3("5.1. Coût élevé et tarification opaque"),
   p("Les plateformes leaders pratiquent des tarifs sur devis, indexés sur le volume d'affaires, souvent prohibitifs pour les TPE/PME (plusieurs milliers à dizaines de milliers de dollars par an). L'absence de grille publique complique la décision et l'onboarding est fréquemment facturé."),
   h3("5.2. Complexité et surdimensionnement"),
@@ -338,7 +338,7 @@ children.push(
   h3("5.6. Faible adaptation au contexte local"),
   p("Les leaders internationaux ne sont pas pensés pour le marché marocain : pas de devise MAD native, absence de langue arabe, réglementation et modèles de marché (situations, attachements, décomptes) éloignés des pratiques locales. Les solutions locales, plus adaptées, offrent en revanche une couverture fonctionnelle plus étroite."),
   h3("5.7. Spécialisation excessive"),
-  p("Beaucoup d'outils excellent sur un seul axe (Graneet = finance, Archipad = réserves, Fieldwire = terrain), obligeant les entreprises à empiler plusieurs logiciels — au prix de coûts et de ruptures de données supplémentaires."),
+  p("Beaucoup d'outils excellent sur un seul axe (Graneet = finance, Archipad = réserves, Fieldwire = terrain), obligeant les entreprises à empiler plusieurs logiciels, au prix de coûts et de ruptures de données supplémentaires."),
   new Paragraph({ children: [new PageBreak()] }),
 );
 
@@ -348,7 +348,7 @@ children.push(
   p("Face à ce paysage, EasyBTP se positionne comme une plateforme intégrée, accessible et adaptée au contexte local, couvrant l'ensemble du cycle de vie du chantier défini par le CPT."),
   h2("6.1. Facteurs de différenciation"),
   bullet([run("Couverture tout-en-un : ", { bold: true }), run("les 11 modules du CPT (du suivi terrain à l'approvisionnement et la finance) dans une seule plateforme, là où le marché impose souvent d'empiler plusieurs outils.")]),
-  bullet([run("Approvisionnement matériaux complet : ", { bold: true }), run("catalogue, demandes, fournisseurs, bons, stock et valorisation, alertes de seuil et KPIs — un module rarement aussi abouti chez les solutions terrain.")]),
+  bullet([run("Approvisionnement matériaux complet : ", { bold: true }), run("catalogue, demandes, fournisseurs, bons, stock et valorisation, alertes de seuil et KPIs, un module rarement aussi abouti chez les solutions terrain.")]),
   bullet([run("Adaptation locale : ", { bold: true }), run("multilingue français / arabe / anglais, devise MAD, logique de situations/attachements conforme aux pratiques marocaines.")]),
   bullet([run("Accessibilité : ", { bold: true }), run("alternative open/académique sans tarification opaque, pensée pour les TPE/PME éligibles aux aides à la digitalisation (ex. programme MOWAKABA).")]),
   bullet([run("Expérience moderne : ", { bold: true }), run("interface glassmorphism responsive (thème blanc & vert), simple et optimisée pour le terrain, gestion multi-rôles (9 profils) et multi-projets.")]),
@@ -384,7 +384,7 @@ children.push(
 children.push(
   h1("7. Conclusion"),
   p("Le marché de la gestion de chantier est mûr mais segmenté : les leaders internationaux (Procore, Autodesk) offrent une couverture très large au prix d'une complexité et d'un coût élevés, peu adaptés aux TPE/PME et au contexte marocain ; les solutions françaises (Finalcad, Graneet, Archipad, Vertuoza, Alobees) sont efficaces mais souvent spécialisées sur un axe ; les solutions locales (MarocBTP, EBP) sont accessibles et adaptées, mais d'un périmètre plus restreint."),
-  p("EasyBTP trouve sa place à l'intersection de ces trois familles : une plateforme intégrée couvrant les 11 modules du CPT, pensée pour le contexte local (multilingue, MAD), accessible et moderne. Les principaux chantiers de consolidation — mobilité hors-ligne, intégrations et technologies avancées (BIM/IA/IoT) — constituent la feuille de route naturelle des phases ultérieures du projet."),
+  p("EasyBTP trouve sa place à l'intersection de ces trois familles : une plateforme intégrée couvrant les 11 modules du CPT, pensée pour le contexte local (multilingue, MAD), accessible et moderne. Les principaux chantiers de consolidation, mobilité hors-ligne, intégrations et technologies avancées (BIM/IA/IoT), constituent la feuille de route naturelle des phases ultérieures du projet."),
   new Paragraph({ children: [new PageBreak()] }),
 );
 
@@ -394,7 +394,7 @@ function ref(label, url) {
     numbering: { reference: "numbers", level: 0 },
     spacing: { after: 70, line: 264 },
     children: [
-      run(label + " — ", {}),
+      run(label + ", ", {}),
       new ExternalHyperlink({ children: [new TextRun({ text: url, style: "Hyperlink", size: 18 })], link: url }),
     ],
   });
@@ -403,26 +403,26 @@ children.push(
   h1("8. Références"),
   p("Comparatifs, avis utilisateurs et documentation éditeurs consultés (juin 2026) :", { size: 20 }),
   ref("Best Construction Management Software 2026 (comparatif Procore/Buildertrend/Autodesk)", "https://www.fuzen.io/posts/best-construction-management-software"),
-  ref("Autodesk vs Procore — comparatif éditeur", "https://construction.autodesk.com/compare/autodesk-vs-procore-construction-software/"),
-  ref("Procore — avis et limites (G2)", "https://www.g2.com/products/procore/reviews"),
-  ref("Procore — features, pricing and limitations", "https://www.constructionbase.ai/blog/procore-features-pricing-and-limitations-explained"),
-  ref("PlanGrid / Autodesk Build — avis et migration", "https://constructable.ai/blog/plangrid-reviews-pricing-alternatives"),
-  ref("BIM 360 vs Fieldwire — coût et ergonomie", "https://www.itqlick.com/compare/bim-360/fieldwire"),
+  ref("Autodesk vs Procore, comparatif éditeur", "https://construction.autodesk.com/compare/autodesk-vs-procore-construction-software/"),
+  ref("Procore, avis et limites (G2)", "https://www.g2.com/products/procore/reviews"),
+  ref("Procore, features, pricing and limitations", "https://www.constructionbase.ai/blog/procore-features-pricing-and-limitations-explained"),
+  ref("PlanGrid / Autodesk Build, avis et migration", "https://constructable.ai/blog/plangrid-reviews-pricing-alternatives"),
+  ref("BIM 360 vs Fieldwire, coût et ergonomie", "https://www.itqlick.com/compare/bim-360/fieldwire"),
   ref("Top 20 des logiciels de suivi de chantier (Vertuoza)", "https://www.vertuoza.com/fr-fr/blog/meilleurs-logiciels-de-suivi-de-chantier"),
   ref("Meilleurs logiciels de suivi de chantier (Archipad)", "https://archipad.com/fr/meilleur-logiciel-suivi-de-chantier/"),
   ref("Barrières à l'adoption des logiciels de construction (Civalgo)", "https://www.civalgo.com/en/blog/construction-software-adoption-barriers"),
   ref("Défis d'adoption et user buy-in (Wunderbuild)", "https://www.wunderbuild.com/blog/encouraging-user-adoption-for-your-construction-software-how-to-get-buy-in-from-site-workers-and-subcontractors"),
-  ref("Logiciel gestion BTP Maroc — solutions et prix (Oasis Techno Cloud)", "https://oasistechnocloud.com/blog/logiciel-gestion-btp-maroc/"),
-  ref("MarocBTP — solution marocaine de gestion de chantier", "https://www.marocbtp.com/"),
-  ref("EBP Bâtiment — Édition Maroc", "https://www.ebp.ma/logiciel-devis-facture-batiment/batiment-maroc"),
+  ref("Logiciel gestion BTP Maroc, solutions et prix (Oasis Techno Cloud)", "https://oasistechnocloud.com/blog/logiciel-gestion-btp-maroc/"),
+  ref("MarocBTP, solution marocaine de gestion de chantier", "https://www.marocbtp.com/"),
+  ref("EBP Bâtiment, Édition Maroc", "https://www.ebp.ma/logiciel-devis-facture-batiment/batiment-maroc"),
 );
 
 // ====================================================================
 //  DOCUMENT
 // ====================================================================
 const doc = new Document({
-  creator: "EasyBTP — ENSAM S8",
-  title: "EasyBTP — Étude de Benchmarking",
+  creator: "EasyBTP, ENSAM S8",
+  title: "EasyBTP, Étude de Benchmarking",
   description: "Benchmarking des solutions de suivi de chantier BTP",
   styles: {
     default: { document: { run: { font: "Calibri", size: 21, color: TXT } } },
@@ -451,7 +451,7 @@ const doc = new Document({
       default: new Header({ children: [new Paragraph({
         alignment: AlignmentType.RIGHT,
         border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: GREY, space: 4 } },
-        children: [new TextRun({ text: "EasyBTP — Étude de Benchmarking", size: 16, color: "888888" })],
+        children: [new TextRun({ text: "EasyBTP, Étude de Benchmarking", size: 16, color: "888888" })],
       })] }),
     },
     footers: {
@@ -459,7 +459,7 @@ const doc = new Document({
         tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
         border: { top: { style: BorderStyle.SINGLE, size: 4, color: GREY, space: 4 } },
         children: [
-          new TextRun({ text: "ENSAM S8 — Projet EasyBTP", size: 16, color: "888888" }),
+          new TextRun({ text: "ENSAM S8, Projet EasyBTP", size: 16, color: "888888" }),
           new TextRun({ text: "\tPage ", size: 16, color: "888888" }),
           new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888" }),
           new TextRun({ text: " / ", size: 16, color: "888888" }),
