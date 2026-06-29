@@ -150,9 +150,111 @@ body {
 /* Recharts : retirer l'outline (thème clair par défaut) */
 .recharts-surface { outline: none; }
 .recharts-default-tooltip {
-  border-radius: 12px !important;
-  border: 1px solid rgba(16, 90, 60, 0.12) !important;
-  box-shadow: 0 10px 30px -12px rgba(16, 90, 60, 0.35) !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(20, 40, 30, 0.08) !important;
+  box-shadow: 0 16px 40px -16px rgba(15, 40, 28, 0.25) !important;
+}
+
+/* ============================================================
+   STYLE "GLASSMORPHISM" — appliqué UNIQUEMENT à l'application
+   (via .app-shell sur le Layout). Cartes de verre translucides
+   & floutées, grands rayons, halos vert/orange diffus en fond,
+   contrôles en pilule. Inspiré d'un dashboard "soft glass".
+   Landing / Login / Register ne sont PAS affectés.
+   Couleurs inchangées : vert / orange / blanc.
+   ============================================================ */
+.app-shell {
+  background-color: #e9f1ec;
+  background-image:
+    radial-gradient(820px circle at 4% 0%, rgba(63, 208, 127, 0.18), transparent 42%),
+    radial-gradient(760px circle at 99% -2%, rgba(255, 126, 62, 0.15), transparent 44%),
+    radial-gradient(960px circle at 82% 102%, rgba(22, 181, 99, 0.13), transparent 52%),
+    radial-gradient(700px circle at 22% 108%, rgba(255, 138, 76, 0.10), transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Cartes : verre translucide flouté, grand rayon, ombre diffuse + liseré clair */
+.app-shell .glass {
+  background-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 24px 56px -30px rgba(13, 58, 38, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  border-radius: 1.75rem;
+}
+.app-shell .glass-sm {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  box-shadow: 0 16px 38px -26px rgba(13, 58, 38, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: 1.4rem;
+}
+.app-shell .glass-strong {
+  background-color: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 28px 64px -30px rgba(13, 58, 38, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-radius: 1.85rem;
+}
+
+/* Boutons en pilule */
+.app-shell .btn { border-radius: 999px; }
+.app-shell .btn-primary { box-shadow: 0 14px 30px -12px rgba(255, 106, 26, 0.5); }
+.app-shell .btn-ghost {
+  background-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #0c5d39;
+}
+.app-shell .btn-ghost:hover { background-color: rgba(255, 255, 255, 0.85); }
+
+/* Champs : pilule, verre doux */
+.app-shell .input,
+.app-shell .select {
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+.app-shell .textarea {
+  border-radius: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+.app-shell .input:focus,
+.app-shell .select:focus,
+.app-shell .textarea:focus {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 126, 62, 0.55);
+  box-shadow: 0 0 0 3px rgba(255, 106, 26, 0.13);
+}
+
+/* Nav latérale : pilule, état actif en verre vert (translucide, pas de halo criard) */
+.app-shell .nav-link { border-radius: 999px; }
+.app-shell .nav-link:hover { background-color: rgba(255, 255, 255, 0.6); }
+.app-shell .nav-link-active,
+.app-shell .nav-link-active:hover {
+  background-image: none;
+  background-color: rgba(10, 147, 80, 0.92);
+  color: #ffffff;
+  box-shadow: 0 14px 28px -12px rgba(10, 147, 80, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Survol des cartes : élévation douce (sans halo orange) */
+.app-shell .card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 36px 66px -32px rgba(13, 58, 38, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Pastille d'icône en verre teinté (remplace les gros aplats vert/orange) */
+.icon-tile {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 8px 20px -14px rgba(13, 58, 38, 0.4);
 }
 
 /* ============================================================

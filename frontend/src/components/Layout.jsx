@@ -65,10 +65,7 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Décor d'arrière-plan (style landing) */}
-      <div className="fixed inset-0 -z-10 grid-overlay grid-overlay-fade opacity-50 pointer-events-none" />
-
+    <div className="min-h-screen flex app-shell">
       {/* Sidebar */}
       <aside
         className={`fixed lg:sticky top-0 z-40 h-screen w-72 shrink-0 transition-transform duration-300 ${

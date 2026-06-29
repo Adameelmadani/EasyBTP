@@ -40,7 +40,7 @@ export default function Suppliers() {
             <Card key={s.id} hover>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white"><Truck size={20} /></div>
+                  <div className="icon-tile grid place-items-center w-11 h-11 rounded-xl ring-1 ring-brand-500/20 text-brand-600"><Truck size={20} /></div>
                   <div><p className="font-bold text-brand-900">{s.name}</p>{s.contactName && <p className="text-xs text-brand-700/60">{s.contactName}</p>}</div>
                 </div>
               </div>

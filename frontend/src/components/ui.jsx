@@ -14,8 +14,8 @@ export function PageHeader({ title, subtitle, icon: Icon, actions }) {
     <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
       <div className="flex items-center gap-3.5">
         {Icon && (
-          <div className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow shrink-0">
-            <Icon size={24} />
+          <div className="icon-tile grid place-items-center w-12 h-12 rounded-2xl ring-1 ring-brand-500/20 text-brand-600 shrink-0">
+            <Icon size={23} />
           </div>
         )}
         <div>
@@ -30,17 +30,17 @@ export function PageHeader({ title, subtitle, icon: Icon, actions }) {
 
 export function StatCard({ label, value, sub, icon: Icon, tint = "brand", className = "" }) {
   const tints = {
-    brand: "from-brand-500 to-brand-700",
-    accent: "from-accent-400 to-accent-600",
-    amber: "from-amber-400 to-amber-600",
-    sky: "from-sky-400 to-sky-600",
-    red: "from-red-400 to-red-600",
-    indigo: "from-indigo-400 to-indigo-600",
+    brand: "text-brand-600 ring-brand-500/20",
+    accent: "text-accent-500 ring-accent-500/20",
+    amber: "text-amber-600 ring-amber-500/20",
+    sky: "text-sky-600 ring-sky-500/20",
+    red: "text-red-500 ring-red-500/20",
+    indigo: "text-indigo-600 ring-indigo-500/20",
   };
   return (
     <Card hover className={`flex items-start gap-4 ${className}`}>
       {Icon && (
-        <div className={`grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br ${tints[tint]} text-white shadow-md shrink-0`}>
+        <div className={`icon-tile grid place-items-center w-12 h-12 rounded-2xl ring-1 shrink-0 ${tints[tint]}`}>
           <Icon size={22} />
         </div>
       )}
@@ -83,7 +83,7 @@ export function Spinner({ className = "" }) {
 export function EmptyState({ icon: Icon = Inbox, title = "Aucune donnée", subtitle, action }) {
   return (
     <div className="grid place-items-center py-16 text-center">
-      <div className="grid place-items-center w-16 h-16 rounded-3xl bg-brand-50 text-brand-400 mb-3">
+      <div className="icon-tile grid place-items-center w-16 h-16 rounded-3xl ring-1 ring-brand-500/15 text-brand-400 mb-3">
         <Icon size={30} />
       </div>
       <p className="font-semibold text-brand-800">{title}</p>
@@ -158,13 +158,13 @@ export function Avatar({ name = "", size = 36 }) {
 
 export function Tabs({ tabs, active, onChange }) {
   return (
-    <div className="flex gap-1 p-1 rounded-2xl bg-white/50 backdrop-blur border border-white/60 overflow-x-auto">
+    <div className="flex gap-1 p-1 rounded-full bg-white/50 backdrop-blur border border-white/60 overflow-x-auto">
       {tabs.map((t) => (
         <button
           key={t.value}
           onClick={() => onChange(t.value)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition ${
-            active === t.value ? "bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-glow" : "text-brand-700/70 hover:bg-white/70"
+          className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition ${
+            active === t.value ? "bg-brand-600 text-white shadow-sm" : "text-brand-700/70 hover:bg-white/70"
           }`}
         >
           {t.icon && <t.icon size={16} />}
