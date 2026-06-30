@@ -12,30 +12,38 @@ import Logo from "./Logo.jsx";
 import { ROLE_LABELS } from "../lib/constants.js";
 
 const NAV = [
-  { section: "Pilotage", items: [
-    { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard, end: true },
-    { to: "/projects", label: "Projets", icon: Building2 },
-    { to: "/planning", label: "Planning", icon: CalendarRange },
-  ]},
-  { section: "Suivi chantier", items: [
-    { to: "/progress", label: "Avancement", icon: ClipboardList },
-    { to: "/reserves", label: "Réserves & NC", icon: AlertTriangle },
-    { to: "/photos", label: "Photos & géoloc", icon: Camera },
-    { to: "/documents", label: "Documents", icon: FolderOpen },
-    { to: "/meetings", label: "Réunions", icon: Users2 },
-  ]},
-  { section: "Approvisionnement", items: [
-    { to: "/materials", label: "Matériaux", icon: Package },
-    { to: "/stock", label: "Stock & mouvements", icon: Boxes },
-    { to: "/supply", label: "Demandes d'appro", icon: Warehouse },
-    { to: "/orders", label: "Bons de commande", icon: ShoppingCart },
-    { to: "/suppliers", label: "Fournisseurs", icon: Truck },
-  ]},
-  { section: "Gestion", items: [
-    { to: "/finance", label: "Finance", icon: Wallet },
-    { to: "/users", label: "Utilisateurs", icon: Users2 },
-    { to: "/activity", label: "Journal d'activité", icon: ScrollText },
-  ]},
+  {
+    section: "Pilotage", items: [
+      { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard, end: true },
+      { to: "/projects", label: "Projets", icon: Building2 },
+      { to: "/planning", label: "Planning", icon: CalendarRange },
+    ]
+  },
+  {
+    section: "Suivi chantier", items: [
+      { to: "/progress", label: "Avancement", icon: ClipboardList },
+      { to: "/reserves", label: "Réserves & NC", icon: AlertTriangle },
+      { to: "/photos", label: "Photos & géoloc", icon: Camera },
+      { to: "/documents", label: "Documents", icon: FolderOpen },
+      { to: "/meetings", label: "Réunions", icon: Users2 },
+    ]
+  },
+  {
+    section: "Approvisionnement", items: [
+      { to: "/materials", label: "Matériaux", icon: Package },
+      { to: "/stock", label: "Stock & mouvements", icon: Boxes },
+      { to: "/supply", label: "Demandes d'appro", icon: Warehouse },
+      { to: "/orders", label: "Bons de commande", icon: ShoppingCart },
+      { to: "/suppliers", label: "Fournisseurs", icon: Truck },
+    ]
+  },
+  {
+    section: "Gestion", items: [
+      { to: "/finance", label: "Finance", icon: Wallet },
+      { to: "/users", label: "Utilisateurs", icon: Users2 },
+      { to: "/activity", label: "Journal d'activité", icon: ScrollText },
+    ]
+  },
 ];
 
 export default function Layout() {
@@ -46,7 +54,7 @@ export default function Layout() {
   const [userMenu, setUserMenu] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
-  const loadNotifs = () => api.get("/notifications").then((r) => setNotifications(r.data)).catch(() => {});
+  const loadNotifs = () => api.get("/notifications").then((r) => setNotifications(r.data)).catch(() => { });
   useEffect(() => {
     loadNotifs();
     const t = setInterval(loadNotifs, 30000);
@@ -68,9 +76,8 @@ export default function Layout() {
     <div className="min-h-screen flex app-shell">
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 z-40 h-screen w-72 shrink-0 transition-transform duration-300 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
+        className={`fixed lg:sticky top-0 z-40 h-screen w-72 shrink-0 transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          }`}
       >
         <div className="h-full m-3 mr-0 lg:mr-3 glass-strong flex flex-col overflow-hidden">
           {/* Logo */}
@@ -115,7 +122,7 @@ export default function Layout() {
           </nav>
 
           <div className="p-3 border-t border-brand-100/60 text-center">
-            <p className="text-[10px] text-brand-700/40">ViaBTP © 2026 · v1.0</p>
+            <p className="text-[10px] text-brand-700/40">ViaBTP © 2026</p>
           </div>
         </div>
       </aside>
