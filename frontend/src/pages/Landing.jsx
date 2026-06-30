@@ -276,7 +276,7 @@ export default function Landing() {
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {MODULES.map((m, i) => (
               <div key={m.t} className="reveal-on-scroll glass p-5 card-hover group" style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
-                <div className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow-green group-hover:from-accent-400 group-hover:to-accent-600 transition-all">
+                <div className="icon-tile grid place-items-center w-11 h-11 rounded-xl ring-1 ring-brand-500/20 text-brand-600 group-hover:text-accent-600 group-hover:ring-accent-500/25 transition-all">
                   <m.icon size={20} />
                 </div>
                 <h3 className="mt-4 font-bold text-brand-900">{m.t}</h3>
@@ -292,7 +292,7 @@ export default function Landing() {
               { icon: Chart, t: "Reporting", d: "Export PDF & Excel, rapports automatiques, historique complet." },
             ].map((m, i) => (
               <div key={m.t} className="reveal-on-scroll glass p-6 card-hover flex items-start gap-4" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="grid place-items-center w-11 h-11 rounded-xl bg-accent-500/12 text-accent-600 shrink-0">
+                <div className="icon-tile grid place-items-center w-11 h-11 rounded-xl ring-1 ring-accent-500/20 text-accent-600 shrink-0">
                   <m.icon size={20} />
                 </div>
                 <div>
