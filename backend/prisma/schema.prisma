@@ -1,4 +1,4 @@
-// EasyBTP - Schéma de base de données
+// ViaBTP - Schéma de base de données
 // Application de suivi de chantier de construction
 generator client {
   provider = "prisma-client-js"

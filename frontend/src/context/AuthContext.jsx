@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("easybtp_token");
+    const token = localStorage.getItem("viabtp_token");
     if (!token) {
       setLoading(false);
       return;
@@ -16,26 +16,26 @@ export function AuthProvider({ children }) {
     api
       .get("/auth/me")
       .then((res) => setUser(res.data.user))
-      .catch(() => localStorage.removeItem("easybtp_token"))
+      .catch(() => localStorage.removeItem("viabtp_token"))
       .finally(() => setLoading(false));
   }, []);
 
   const login = async (email, password) => {
     const res = await api.post("/auth/login", { email, password });
-    localStorage.setItem("easybtp_token", res.data.token);
+    localStorage.setItem("viabtp_token", res.data.token);
     setUser(res.data.user);
     return res.data.user;
   };
 
   const register = async (payload) => {
     const res = await api.post("/auth/register", payload);
-    localStorage.setItem("easybtp_token", res.data.token);
+    localStorage.setItem("viabtp_token", res.data.token);
     setUser(res.data.user);
     return res.data.user;
   };
 
   const logout = () => {
-    localStorage.removeItem("easybtp_token");
+    localStorage.removeItem("viabtp_token");
     setUser(null);
   };
 

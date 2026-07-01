@@ -1,7 +1,7 @@
 {
-  "name": "easybtp-backend",
+  "name": "viabtp-backend",
   "version": "1.0.0",
-  "description": "EasyBTP - API REST de suivi de chantier de construction",
+  "description": "ViaBTP - API REST de suivi de chantier de construction",
   "type": "module",
   "main": "src/server.js",
   "scripts": {

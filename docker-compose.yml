@@ -1,25 +1,25 @@
 services:
   db:
     image: postgres:16-alpine
-    container_name: easybtp_db
+    container_name: viabtp_db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: easybtp
-      POSTGRES_PASSWORD: easybtp
-      POSTGRES_DB: easybtp
+      POSTGRES_USER: viabtp
+      POSTGRES_PASSWORD: viabtp
+      POSTGRES_DB: viabtp
     ports:
       - "5432:5432"
     volumes:
-      - easybtp_pgdata:/var/lib/postgresql/data
+      - viabtp_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U easybtp -d easybtp"]
+      test: ["CMD-SHELL", "pg_isready -U viabtp -d viabtp"]
       interval: 5s
       timeout: 5s
       retries: 10
 
   adminer:
     image: adminer:latest
-    container_name: easybtp_adminer
+    container_name: viabtp_adminer
     restart: unless-stopped
     depends_on:
       - db
@@ -27,4 +27,4 @@ services:
       - "8080:8080"
 
 volumes:
-  easybtp_pgdata:
+  viabtp_pgdata:

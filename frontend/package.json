@@ -1,7 +1,7 @@
 {
-  "name": "easybtp-frontend",
+  "name": "viabtp-frontend",
   "version": "1.0.0",
-  "description": "EasyBTP - Interface web de suivi de chantier",
+  "description": "ViaBTP - Interface web de suivi de chantier",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import api from "../api/client.js";
 
-const STORE_KEY = "easybtp_project";
+const STORE_KEY = "viabtp_project";
 
 // Liste des projets (pour les filtres) + sélection courante.
 // La sélection suit l'utilisateur entre les modules : on lit d'abord le projet

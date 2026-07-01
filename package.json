@@ -1,8 +1,8 @@
 {
-  "name": "easybtp",
+  "name": "viabtp",
   "version": "1.0.0",
   "private": true,
-  "description": "EasyBTP - Plateforme de suivi de chantier de construction (web)",
+  "description": "ViaBTP - Plateforme de suivi de chantier de construction (web)",
   "scripts": {
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down",

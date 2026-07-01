@@ -30,7 +30,7 @@ Interface **glassmorphism** thème **blanc, vert & orange**, multi-rôles, multi
 docker compose up -d db
 ```
 > Adminer (explorateur de BDD) est aussi disponible sur http://localhost:8080
-> (système `PostgreSQL`, serveur `db`, user/mot de passe/base = `easybtp`).
+> (système `PostgreSQL`, serveur `db`, user/mot de passe/base = `viabtp`).
 
 ### 2. Backend
 ```bash
