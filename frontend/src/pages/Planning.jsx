@@ -6,6 +6,7 @@ import ProjectPicker from "../components/ProjectPicker.jsx";
 import { useProjects } from "../lib/hooks.js";
 import { TASK_STATUS, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 
 // Barres de Gantt : palette verte/orange (neutre pour « à faire »)
 const STATUS_BAR = { A_FAIRE: "#9fb3a8", EN_COURS: "#ff8a4c", TERMINE: "#16b563", EN_RETARD: "#f15206" };
@@ -13,6 +14,7 @@ const DAY = 86400000;
 
 export default function Planning() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const { projects, projectId, setProjectId } = useProjects();
   const [tasks, setTasks] = useState(null);
   const [users, setUsers] = useState([]);
@@ -38,7 +40,7 @@ export default function Planning() {
     return { range: { min, max, total }, months: m };
   }, [tasks]);
 
-  const remove = async (t) => { if (!confirm("Supprimer cette tâche ?")) return; await api.delete(`/tasks/${t.id}`); load(); toast("Tâche supprimée"); };
+  const remove = async (t) => { if (!(await confirm("Supprimer cette tâche ?"))) return; await api.delete(`/tasks/${t.id}`); load(); toast("Tâche supprimée"); };
 
   return (
     <div>

@@ -4,9 +4,11 @@ import api from "../api/client.js";
 import { PageHeader, Card, Spinner, Modal, Field, Input, Select, EmptyState, Badge } from "../components/ui.jsx";
 import { ORDER_STATUS, fmtMAD, fmtNum } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 
 export default function Orders() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const [orders, setOrders] = useState(null);
   const [suppliers, setSuppliers] = useState([]);
   const [materials, setMaterials] = useState([]);
@@ -23,7 +25,12 @@ export default function Orders() {
   }, []);
 
   const receive = async (o) => {
-    if (!confirm("Confirmer la réception ? Le stock sera mis à jour.")) return;
+    if (!(await confirm({
+      title: "Réceptionner la commande",
+      message: "Confirmer la réception ? Le stock sera mis à jour.",
+      confirmLabel: "Réceptionner",
+      tone: "default",
+    }))) return;
     await api.patch(`/orders/${o.id}/status`, { status: "LIVREE" });
     load(); setDetail(null); toast("Commande réceptionnée · stock mis à jour");
   };

@@ -6,10 +6,12 @@ import ProjectPicker from "../components/ProjectPicker.jsx";
 import { useProjects } from "../lib/hooks.js";
 import { DOC_CATEGORIES, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Documents() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const { hasRole } = useAuth();
   const { projects, projectId, setProjectId } = useProjects();
   const [docs, setDocs] = useState(null);
@@ -32,7 +34,7 @@ export default function Documents() {
   useEffect(() => { if (projectId) load(); }, [projectId, category, query]);
 
   const sign = async (d) => { await api.patch(`/documents/${d.id}/sign`); load(); toast("Document signé électroniquement"); };
-  const remove = async (d) => { if (!confirm("Supprimer ce document ?")) return; await api.delete(`/documents/${d.id}`); load(); toast("Document supprimé"); };
+  const remove = async (d) => { if (!(await confirm("Supprimer ce document ?"))) return; await api.delete(`/documents/${d.id}`); load(); toast("Document supprimé"); };
 
   return (
     <div>

@@ -11,12 +11,14 @@ import {
 import ProjectFormModal from "../components/ProjectFormModal.jsx";
 import { PROJECT_STATUS, LOT_CATEGORIES, ROLE_LABELS, fmtMAD, fmtNum, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const confirm = useConfirm();
   const { hasRole } = useAuth();
   const [project, setProject] = useState(null);
   const [lots, setLots] = useState([]);
@@ -45,13 +47,17 @@ export default function ProjectDetail() {
   ];
 
   const deleteLot = async (lotId) => {
-    if (!confirm("Supprimer ce lot ?")) return;
+    if (!(await confirm("Supprimer ce lot ?"))) return;
     await api.delete(`/lots/${lotId}`);
     load(); toast("Lot supprimé");
   };
 
   const deleteProject = async () => {
-    if (!confirm(`Supprimer définitivement le projet « ${project.name} » ? Cette action est irréversible.`)) return;
+    if (!(await confirm({
+      title: "Supprimer le projet",
+      message: `Supprimer définitivement le projet « ${project.name} » ?\nTous les lots, réserves, documents, photos et données associés seront également supprimés. Cette action est irréversible.`,
+      confirmLabel: "Supprimer définitivement",
+    }))) return;
     try {
       await api.delete(`/projects/${id}`);
       toast("Projet supprimé");
@@ -62,7 +68,7 @@ export default function ProjectDetail() {
   };
 
   const removeMember = async (memberId) => {
-    if (!confirm("Retirer cet intervenant du projet ?")) return;
+    if (!(await confirm({ message: "Retirer cet intervenant du projet ?", confirmLabel: "Retirer" }))) return;
     await api.delete(`/projects/${id}/members/${memberId}`);
     load(); toast("Intervenant retiré");
   };

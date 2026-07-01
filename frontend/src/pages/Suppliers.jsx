@@ -3,6 +3,7 @@ import { Truck, Plus, Mail, Phone, MapPin, Star, Pencil, Trash2, Package, Shoppi
 import api from "../api/client.js";
 import { PageHeader, Card, Spinner, Modal, Field, Input, EmptyState, Badge } from "../components/ui.jsx";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 
 function Stars({ value }) {
   return (
@@ -17,13 +18,14 @@ function Stars({ value }) {
 
 export default function Suppliers() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const [suppliers, setSuppliers] = useState(null);
   const [edit, setEdit] = useState(null);
   const [open, setOpen] = useState(false);
 
   const load = () => api.get("/suppliers").then((r) => setSuppliers(r.data)).catch(() => setSuppliers([]));
   useEffect(() => { load(); }, []);
-  const remove = async (s) => { if (!confirm("Supprimer ce fournisseur ?")) return; await api.delete(`/suppliers/${s.id}`); load(); toast("Supprimé"); };
+  const remove = async (s) => { if (!(await confirm("Supprimer ce fournisseur ?"))) return; await api.delete(`/suppliers/${s.id}`); load(); toast("Supprimé"); };
 
   return (
     <div>

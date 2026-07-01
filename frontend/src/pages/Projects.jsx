@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Building2, Plus, Search, MapPin, Calendar, Users2, AlertTriangle, FolderOpen, Camera } from "lucide-react";
+import { Building2, Plus, Search, MapPin, Calendar, Users2, AlertTriangle, FolderOpen, Camera, Trash2 } from "lucide-react";
 import api from "../api/client.js";
 import { Card, PageHeader, Spinner, Badge, ProgressBar, EmptyState } from "../components/ui.jsx";
 import ProjectFormModal from "../components/ProjectFormModal.jsx";
 import { PROJECT_STATUS, fmtMAD } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Projects() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const { hasRole } = useAuth();
   const [projects, setProjects] = useState(null);
   const [q, setQ] = useState("");
@@ -32,6 +34,24 @@ export default function Projects() {
   useEffect(() => { load(); }, [query, status]);
 
   const canCreate = hasRole("MAITRE_OUVRAGE", "ARCHITECTE", "BUREAU_ETUDES", "CONDUCTEUR_TRAVAUX", "ENTREPRISE");
+  const canDelete = hasRole("MAITRE_OUVRAGE");
+
+  const deleteProject = async (e, p) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!(await confirm({
+      title: "Supprimer le projet",
+      message: `Supprimer définitivement le projet « ${p.name} » ?\nTous les lots, réserves, documents, photos et données associés seront également supprimés. Cette action est irréversible.`,
+      confirmLabel: "Supprimer définitivement",
+    }))) return;
+    try {
+      await api.delete(`/projects/${p.id}`);
+      setProjects((prev) => prev.filter((x) => x.id !== p.id));
+      toast("Projet supprimé");
+    } catch (err) {
+      toast(err.response?.data?.message || "Suppression impossible", "error");
+    }
+  };
 
   return (
     <div>
@@ -92,6 +112,15 @@ export default function Projects() {
                   <span className="flex items-center gap-1"><AlertTriangle size={13} /> {p._count?.reserves || 0}</span>
                   <span className="flex items-center gap-1"><FolderOpen size={13} /> {p._count?.documents || 0}</span>
                   <span className="flex items-center gap-1"><Camera size={13} /> {p._count?.photos || 0}</span>
+                  {canDelete && (
+                    <button
+                      onClick={(e) => deleteProject(e, p)}
+                      className="ml-auto -my-1 p-1.5 rounded-lg text-brand-400 hover:text-red-500 hover:bg-red-50 transition"
+                      title="Supprimer le projet"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  )}
                 </div>
               </Card>
             </Link>

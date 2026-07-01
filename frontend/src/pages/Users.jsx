@@ -4,10 +4,12 @@ import api from "../api/client.js";
 import { PageHeader, Card, Spinner, Modal, Field, Input, Select, EmptyState, Badge, Avatar } from "../components/ui.jsx";
 import { ROLE_LABELS } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function UsersPage() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const { hasRole } = useAuth();
   const [users, setUsers] = useState(null);
   const [edit, setEdit] = useState(null);
@@ -16,7 +18,7 @@ export default function UsersPage() {
 
   const load = () => api.get("/users").then((r) => setUsers(r.data)).catch(() => setUsers([]));
   useEffect(() => { load(); }, []);
-  const remove = async (u) => { if (!confirm("Supprimer cet utilisateur ?")) return; await api.delete(`/users/${u.id}`); load(); toast("Supprimé"); };
+  const remove = async (u) => { if (!(await confirm("Supprimer cet utilisateur ?"))) return; await api.delete(`/users/${u.id}`); load(); toast("Supprimé"); };
 
   return (
     <div>

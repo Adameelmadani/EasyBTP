@@ -7,9 +7,11 @@ import ProjectPicker from "../components/ProjectPicker.jsx";
 import { useProjects } from "../lib/hooks.js";
 import { FINANCE_TYPE, FINANCE_STATUS, fmtMAD, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 
 export default function Finance() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const { projects, projectId, setProjectId } = useProjects();
   const [records, setRecords] = useState(null);
   const [summary, setSummary] = useState(null);
@@ -22,7 +24,7 @@ export default function Finance() {
   useEffect(() => { if (projectId) load(); }, [projectId]);
 
   const changeStatus = async (rec, status) => { await api.put(`/finance/${rec.id}`, { status }); load(); toast("Statut mis à jour"); };
-  const remove = async (rec) => { if (!confirm("Supprimer ?")) return; await api.delete(`/finance/${rec.id}`); load(); toast("Supprimé"); };
+  const remove = async (rec) => { if (!(await confirm("Supprimer cet enregistrement ?"))) return; await api.delete(`/finance/${rec.id}`); load(); toast("Supprimé"); };
 
   const billedPct = summary?.marketAmount ? (summary.billed / summary.marketAmount) * 100 : 0;
   const chartData = (records || []).slice().reverse().map((r, i) => ({ name: r.number, cumul: (r.cumulativeAmount || 0) / 1e6 }));

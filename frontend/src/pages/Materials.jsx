@@ -4,9 +4,11 @@ import api from "../api/client.js";
 import { PageHeader, Card, StatCard, Spinner, Modal, Field, Input, Select, EmptyState, Badge, ProgressBar } from "../components/ui.jsx";
 import { MATERIAL_CATEGORIES, fmtMAD, fmtNum, enumToOptions } from "../lib/constants.js";
 import { useToast } from "../context/ToastContext.jsx";
+import { useConfirm } from "../context/ConfirmContext.jsx";
 
 export default function Materials() {
   const { toast } = useToast();
+  const confirm = useConfirm();
   const [materials, setMaterials] = useState(null);
   const [suppliers, setSuppliers] = useState([]);
   const [valuation, setValuation] = useState(null);
@@ -33,7 +35,7 @@ export default function Materials() {
   useEffect(() => { load(); }, [query, category, lowOnly]);
   useEffect(() => { api.get("/suppliers").then((r) => setSuppliers(r.data)); }, []);
 
-  const remove = async (m) => { if (!confirm("Supprimer ce matériau ?")) return; await api.delete(`/materials/${m.id}`); load(); toast("Supprimé"); };
+  const remove = async (m) => { if (!(await confirm("Supprimer ce matériau ?"))) return; await api.delete(`/materials/${m.id}`); load(); toast("Supprimé"); };
 
   return (
     <div className="space-y-5">
