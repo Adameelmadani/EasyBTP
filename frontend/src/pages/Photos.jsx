@@ -4,6 +4,7 @@ import api from "../api/client.js";
 import { PageHeader, Card, Spinner, Modal, Field, Input, Select, EmptyState, Badge } from "../components/ui.jsx";
 import ProjectPicker from "../components/ProjectPicker.jsx";
 import { useProjects } from "../lib/hooks.js";
+import { resizeImage, MAX_UPLOAD_MB } from "../lib/image.js";
 import { useToast } from "../context/ToastContext.jsx";
 
 export default function Photos() {
@@ -69,7 +70,11 @@ export default function Photos() {
         <div className="fixed inset-0 z-50 grid place-items-center p-4 bg-brand-900/60 backdrop-blur-md animate-fade-in" onClick={() => setLightbox(null)}>
           <button className="absolute top-5 right-5 text-white/80 hover:text-white"><X size={28} /></button>
           <div className="max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
-            <img src={lightbox.url} alt={lightbox.caption} className="w-full rounded-2xl shadow-glass" />
+            <img
+              src={lightbox.url}
+              alt={lightbox.caption}
+              className="block w-auto max-w-full max-h-[80vh] mx-auto rounded-2xl shadow-glass"
+            />
             <div className="glass-strong mt-3 p-4 flex items-center justify-between">
               <div>
                 <p className="font-semibold text-brand-900">{lightbox.caption}</p>
@@ -90,15 +95,30 @@ function PhotoModal({ open, onClose, projectId, onSaved }) {
   const [file, setFile] = useState(null);
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
+  const [busy, setBusy] = useState(false);
+
+  const pickFile = (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    if (f.size > MAX_UPLOAD_MB * 1024 * 1024) {
+      toast(`Image trop volumineuse (max ${MAX_UPLOAD_MB} Mo)`, "error");
+      e.target.value = "";
+      return;
+    }
+    setFile(f);
+  };
+
   const submit = async (e) => {
     e.preventDefault();
+    setBusy(true);
     try {
       const fd = new FormData();
       Object.entries({ ...form, projectId }).forEach(([k, v]) => v != null && fd.append(k, v));
-      if (file) fd.append("file", file);
+      if (file) fd.append("file", await resizeImage(file));
       await api.post("/photos", fd, { headers: { "Content-Type": "multipart/form-data" } });
       setForm({}); setFile(null); onSaved();
     } catch (err) { toast(err.response?.data?.message || "Erreur", "error"); }
+    finally { setBusy(false); }
   };
 
   return (
@@ -108,8 +128,9 @@ function PhotoModal({ open, onClose, projectId, onSaved }) {
           <label className="flex items-center gap-2 input cursor-pointer">
             <Upload size={16} className="text-brand-400" />
             <span className="text-sm text-brand-700/70 truncate">{file ? file.name : "Choisir une image..."}</span>
-            <input type="file" accept="image/*" className="hidden" onChange={(e) => setFile(e.target.files[0])} />
+            <input type="file" accept="image/*" className="hidden" onChange={pickFile} />
           </label>
+          <p className="text-[11px] text-brand-700/50 mt-1">Max {MAX_UPLOAD_MB} Mo · l'image est automatiquement redimensionnée et compressée.</p>
         </Field>
         <p className="text-center text-xs text-brand-700/40"> ou </p>
         <Field label="URL d'image"><Input value={form.url || ""} onChange={set("url")} placeholder="https://..." /></Field>
@@ -119,7 +140,7 @@ function PhotoModal({ open, onClose, projectId, onSaved }) {
           <Field label="Latitude"><Input type="number" step="any" value={form.latitude || ""} onChange={set("latitude")} /></Field>
           <Field label="Longitude"><Input type="number" step="any" value={form.longitude || ""} onChange={set("longitude")} /></Field>
         </div>
-        <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={onClose}>Annuler</button><button className="btn-primary"><Plus size={16} /> Ajouter</button></div>
+        <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={onClose}>Annuler</button><button className="btn-primary" disabled={busy}><Plus size={16} /> {busy ? "Envoi..." : "Ajouter"}</button></div>
       </form>
     </Modal>
   );
